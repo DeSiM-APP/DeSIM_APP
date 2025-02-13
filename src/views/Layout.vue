@@ -3,7 +3,7 @@
     <header class="header">
       <template v-if="headerTemplate === 'back-close'">
         <div class="header-left">
-          <button class="header-btn" @click="onBack">
+          <button @click="onBack">
             <Back />
           </button>
         </div>
@@ -11,7 +11,7 @@
           {{ title }}
         </div>
         <div class="header-right">
-          <button class="header-btn" @click="onClose">
+          <button @click="onClose">
             <Close />
           </button>
         </div>
@@ -110,7 +110,10 @@ const onUserCenter = () => {
       align-items: center;
       justify-content: center;
     }
-
+    .header-right {
+      gap: 12px;
+      width: 120px;
+    }
     .header-btn {
       width: 32px;
       height: 32px;
