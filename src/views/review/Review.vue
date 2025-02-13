@@ -1,5 +1,5 @@
 <template>
   <div>
-    Preview
+    Review
   </div>
 </template>

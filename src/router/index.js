@@ -5,8 +5,7 @@ import Register from '@/views/register/Register.vue';     // 注册页面，对�
 import Layout from '@/views/Layout.vue'                // Layout 组件
 import Home from '@/views/home/Home.vue';             // 主页，对应路由 "/home"
 import Import from '@/views/import/Import.vue';     // 导入订单页面，对应路由 "/import"
-import Preview from '@/views/preview/Preview.vue';       // 预览页面，对应路由 "/preview"
-import i18n from '@/locales/i18n';
+import Review from '@/views/review/Review.vue';       // 预览页面，对应路由 "/preview"
 
 const routes = [
   {
@@ -47,12 +46,12 @@ const routes = [
         }
       },
       {
-        path: 'preview',
-        name: 'Preview',
-        component: Preview,
+        path: 'review',
+        name: 'Review',
+        component: Review,
         meta: {
           headerTemplate: 'user_center',
-          title: 'preview.title'
+          title: 'review.title'
         }
       }
     ]
