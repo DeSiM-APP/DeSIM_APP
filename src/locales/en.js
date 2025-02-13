@@ -12,5 +12,14 @@ export default {
     register: 'Register',
     buttonText: "Already have an account?",
     login: "Log in"
+  },
+  home: {
+    title: "Already have eSIMs"
+  },
+  import: {
+    title: "Import an order"
+  },
+  preview: {
+    title: "eSIM center"
   }
 } 
