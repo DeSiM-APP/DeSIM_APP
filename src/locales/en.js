@@ -1,17 +1,34 @@
 export default {
   welcome: {
     hello: 'Hello world!',
-    start: 'Get Started'
+    start: 'Get Started',
+    synopsis:'Experience fast, reliable internet with unbeatable coverage and convenience. Stay connected effortlessly with DeSiM ONE.',
+    bigSynopsis:'Travel freely and easily with an eSIM'
   },
   login: {
     login: 'Log in',
+    gooleButtonText:'Continue with Google',
+    lineButtonText:'Continue with Line',
+    iphoneButtonText:'Continue with Apple',
     buttonText: "Don't have an account?",
-    register: "Register" 
+    forget:'Forgot Password ?',
+    buttonText:'Don’t have an account?     ',
+    register: "Register" ,
+    loginText:'Log in',
+    logintostart:'Login to start',
+    or:'Or',
+    one:'ONE',
+    email:'Email',
+    password:'Password'
   },
   register: {
     register: 'Register',
+    registerText:'Register',
     buttonText: "Already have an account?",
-    login: "Log in"
+    login: "Log in",
+    usename:'Username',
+    email:'Email',
+    password:'SetPassword'
   },
   home: {
     title: "Already have eSIMs",
