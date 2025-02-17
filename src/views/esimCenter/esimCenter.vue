@@ -54,7 +54,6 @@ const { t } = useI18n()
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 18%;
   ::v-deep .van-tabs{
     width: 100%;
   }
