@@ -10,16 +10,18 @@
         @set-active-key="updateActive"
       />
     </div>
-    <Button :disabled="isNaN(activeCard)" @click="handleImport">Import</Button>
+    <Button :disabled="disabled" @click="handleImport">{{ $t('review.buttonIpt') }}</Button>
   </div>
 </template>
 <script setup>
 import ReviewCard from "./ReviewCard.vue";
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, computed } from "vue";
 import Button from "@/components/Button.vue";
 import { useClickOutside } from "@/utils/utils";
 
 const activeCard = ref(NaN);
+
+const disabled = computed(() => isNaN(activeCard.value))
 
 const cardList = [
   {
@@ -47,6 +49,8 @@ const updateActive = (e) => {
   } else {
     activeCard.value = key;
   }
+  console.log();
+  
 };
 
 const onClickOutside = () => {

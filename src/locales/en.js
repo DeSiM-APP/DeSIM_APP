@@ -68,6 +68,7 @@ export default {
     remainingDataText: "3 GB",
     title: "Review",
     header: "eSIMs contained",
-    setDate: "Set travel date"
+    setDate: "Set travel date",
+    buttonIpt: 'Import'
   }
 } 
