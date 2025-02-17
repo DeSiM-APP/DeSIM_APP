@@ -54,6 +54,7 @@ export default {
   review: {
     title: "Review",
     header: "eSIMs contained",
-    setDate: "Set travel date"
+    setDate: "Set travel date",
+    buttonIpt: 'Import'
   }
 } 

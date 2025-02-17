@@ -71,8 +71,8 @@ watch(
   }
 );
 
-const updateActive = (value) => {
-  emit("setActiveKey", { value, key: props.item.key });
+const updateActive = () => {
+  emit("setActiveKey", { value: localActive.value, key: props.item.key });
 };
 
 const onConfirm = (value) => {
