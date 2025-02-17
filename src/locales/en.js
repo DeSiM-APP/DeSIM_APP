@@ -52,7 +52,10 @@ export default {
     buttonText: "Continue"
   },
   review: {
-    title: "eSIM center"
+    title: "Review",
+    header: "eSIMs contained",
+    setDate: "Set travel date",
+    buttonIpt: 'Import'
   },
   esimCenter: {
     title: "eSIM center",

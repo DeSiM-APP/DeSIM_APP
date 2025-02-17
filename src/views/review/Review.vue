@@ -32,6 +32,12 @@ const cardList = [
   },
   {
     name: "USA eSIM | 30-days plan",
+    capacity: "20GB",
+    key: 3,
+    time: "30 day",
+  },
+  {
+    name: "USA eSIM | 30-days plan",
     capacity: "10GB",
     time: "30 day",
     key: 1,
