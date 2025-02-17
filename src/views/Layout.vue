@@ -101,11 +101,6 @@ const onUserCenter = () => {
     display: flex;
     padding: 20px;
     align-items: center;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: white;
 
     .header-left,
     .header-right {
@@ -140,6 +135,7 @@ const onUserCenter = () => {
   .content {
     flex: 1;
     padding: 16px;
+    overflow-x: hidden;
   }
 }
 </style>
