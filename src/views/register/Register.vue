@@ -49,7 +49,7 @@ const toPage = (path) => {
   align-items: center;
   justify-content: center;
   .register-title{
-    margin-top: 60px;
+    margin-top: 15%;
     font-weight: 700;
     font-size: 32px;
     line-height: 40px;
@@ -59,7 +59,7 @@ const toPage = (path) => {
   .xinxi{
     width: 342px;
     height: 240px;
-    margin-top: 40px;
+    margin-top: 10%;
     .import-label {
     font-family: Open Sans;
     font-weight: 400;
@@ -74,7 +74,7 @@ const toPage = (path) => {
   .register-button {
     width: 342px;
     height: 48px;
-    margin-top: 40px;
+    margin-top: 10%;
     font-weight: 400;
     font-size: 12px;
     display: flex;
@@ -93,7 +93,7 @@ const toPage = (path) => {
     justify-content: center;
     color: var(--Grey, #6C7278);
     .router-link{
-      margin-left: 5px;
+      margin-left: 1%;
       font-weight: 400;
       font-size: 12px;
       color: #EF9C11;

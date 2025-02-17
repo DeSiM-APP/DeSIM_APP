@@ -1,8 +1,9 @@
 <template>
   <div class="welcome">
     <div class="welcome-img">
-      <div class="mf"></div>
-      <div class="hy"></div>
+      <img src="@/assets/sy-ty.png" alt="" class="welcome-img-ty">
+      <img src="@/assets/sy-mf.png" alt="" class="mf">
+      <img src="@/assets/sy-hy.png" alt="" class="hy">
     </div>
     <div class="welcome-big-synopsis">{{ welcomeBigSynopsis}}</div>
     <div class="welcome-synopsis">{{ welcomeSynopsis}}</div>
@@ -36,32 +37,27 @@ const welcomeBigSynopsis = t('welcome.bigSynopsis');
   align-items: center;
   justify-content: center;
   .welcome-img {
-    width: 390px;
+    width: 100%;
     height: 390px;
-    background-image: url('@/assets/sy-ty.png');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
     position: relative;
+    .welcome-img-ty{
+      width: 100%;
+      height: 100%;
+    }
     .mf {
-      width: 275.4px;
-      height: 275.4px;
-      background-image: url('@/assets/sy-mf.png');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
+      width: 65%;
+      height: 65%;
       position: absolute;
-      top: 129.67px;
-      left: 118px;
+      top: 41%;
+      left: 34%;
       transform: rotate(360.88deg);
     }
     .hy {
       width: 149.25px;
       height: 73.65px;
-      background-image: url('@/assets/sy-hy.png');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
       position: absolute;
-      top: 222px;
-      left: 68.76px;
+      top: 61%;
+      left: 19%;
     }
   }
   .welcome-big-synopsis {
@@ -69,7 +65,7 @@ const welcomeBigSynopsis = t('welcome.bigSynopsis');
     height: 84px;
     font-size: 32px;
     font-weight: 700;
-    margin-top: 80px;
+    margin-top: 12%;
     line-height: 41.6px;
     letter-spacing: -2%;
   }
@@ -79,12 +75,12 @@ const welcomeBigSynopsis = t('welcome.bigSynopsis');
     font-weight: 400;
     font-size: 14px;
     line-height: 19.6px;
-    margin-top: 12px;
+    margin-top: 10%;
   }
   .welcome-button {
     width: 342px;
     height: 48px;
-    margin-top: 40px;
+    margin-top: 10%;
   }
 }
 </style>

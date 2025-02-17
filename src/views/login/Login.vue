@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login-logo">
-      <div class="login-img"></div>
+      <img src="@/assets/esim-logo.png" alt="" class="login-img">
       <div class="login-one">{{ $t('login.one') }}</div>
     </div>
     <div class="login-title">{{ $t('login.logintostart') }}</div>
@@ -27,19 +27,19 @@
     </div>
     <div class="or-line">{{ $t('login.or') }}</div>
     <div class="login-Goole">
-      <div class="log-Goole"></div>
+      <img src="@/assets/google -logo.png" alt="" class="log-Goole">
       <div class="goole-text">
         {{ $t('login.gooleButtonText') }}
       </div>
     </div>
     <div class="login-line">
-      <div class="log-line"></div>
+      <img src="@/assets/Line-logo.png" alt="" class="log-line">
       <div class="line-text">
         {{ $t('login.lineButtonText') }}
       </div>
     </div>
     <div class="login-iphone">
-      <div class="log-iphone"></div>
+      <img src="@/assets/apple-logo.png" alt="" class="log-iphone">
       <div class="iphone-text">
         {{ $t('login.iphoneButtonText') }}
       </div>
@@ -75,24 +75,21 @@ const toPage = (path) => {
     .login-img{
       width: 108px;
       height: 100%;
-      background-image: url('@/assets/esim-logo.png');
-      background-size: 100% 100%;
-      background-repeat: no-repeat;
-      margin-left: 24px;
-      margin-top: 20px;
+      margin-left: 5%;
+      margin-top: 5%;
     }
     .login-one {
       font-family: Goldman;
       font-weight: 400;
       font-size: 18px;
       line-height: 24px;
-      margin-left: 14px;
-      margin-top: 18px;
+      margin-left: 4%;
+      margin-top: 4%;
       color: #393939;
     }
   }
   .login-title{
-    margin-top: 40px;
+    margin-top: 10%;
     font-weight: 700;
     font-size: 32px;
     line-height: 40px;
@@ -102,7 +99,7 @@ const toPage = (path) => {
   .xinxi{
     width: 342px;
     height: 168px;
-    margin-top: 40px;
+    margin-top: 10%;
     .import-label {
     font-family: Open Sans;
     font-weight: 400;
@@ -126,7 +123,7 @@ const toPage = (path) => {
   .or-line{
     width: 342px;
     text-align: center;
-    margin-top: 34px;
+    margin-top: 9%;
     margin-bottom: 24px;
     position: relative;
     color: #6C7278;
@@ -151,57 +148,51 @@ const toPage = (path) => {
     }
   }
   .login-Goole{
-    width: 342px;
+    width: 90%;
     height: 48px;
     border-radius: 10px;
     border: 1px solid #EFF0F6;
-    margin-top: 15px;
+    margin-top: 4%;
     display: flex;
     align-items: center;
     justify-content: center;
     .log-Goole{
       width: 24px;
       height: 24px;
-      background-image: url('@/assets/google -logo.png');
-      background-size: 100% 100%;
     }
     .goole-text{
       margin-left: 3%;
     }
   }
   .login-line{
-    width: 342px;
+    width: 90%;
     height: 48px;
     border-radius: 10px;
     border: 1px solid #EFF0F6;
-    margin-top: 15px;
+    margin-top: 4%;
     display: flex;
     align-items: center;
     justify-content: center;
     .log-line{
       width: 24px;
       height: 24px;
-      background-image: url('@/assets/Line-logo.png');
-      background-size: 100% 100%;
     } 
     .line-text{
       margin-left: 3%;
     }
   }
   .login-iphone{
-    width: 342px;
+    width: 90%;
     height: 48px;
     border-radius: 10px;
     border: 1px solid #EFF0F6;
-    margin-top: 15px;
+    margin-top: 4%;
     display: flex;
     align-items: center;
     justify-content: center;
     .log-iphone{
       width: 24px;
       height: 24px;
-      background-image: url('@/assets/apple-logo.png');
-      background-size: 100% 100%;
     }
     .iphone-text{
       margin-left: 3%;
@@ -210,7 +201,7 @@ const toPage = (path) => {
   .login-button2 {
     width: 342px;
     height: 48px;
-    margin-top: 40px;
+    margin-top: 10%;
     font-weight: 400;
     font-size: 12px;
     display: flex;
@@ -218,7 +209,7 @@ const toPage = (path) => {
     justify-content: center;
     color: var(--Grey, #6C7278);
     .router-link{
-      margin-left: 5px;
+      margin-left: 1%;
       font-weight: 400;
       font-size: 12px;
       color: #EF9C11;
@@ -227,7 +218,7 @@ const toPage = (path) => {
   .login-button {
     width: 342px;
     height: 48px;
-    margin-top: 40px;
+    margin-top: 8%;
     font-weight: 400;
     font-size: 12px;
     display: flex;
@@ -235,7 +226,7 @@ const toPage = (path) => {
     justify-content: center;
     color: #000;
     .router-link{
-      margin-left: 5px;
+      margin-left: 1%;
       font-weight: 400;
       font-size: 12px;
       color: #EF9C11;

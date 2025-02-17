@@ -30,7 +30,7 @@ function onInput(event) {
 .input-component {
   width: 350px;
   height: 46px;
-  padding: 27px 14px;
+  padding: 5% 3%;
   border-radius: 10px;
   border: 1px solid var(--Stroke, #EDF1F3);
   box-shadow: 0px 1px 2px 0px #E4E5E73D;

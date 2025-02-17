@@ -16,7 +16,7 @@ function handleClick() {
 .custom-button {
   box-shadow: 0px 0px 12px 0px #0000001A, 0px 1px 2px 0px #F4D42D, 0px 0px 12px 0px #B1C9C833;
   border-width: 1px;
-  padding: 10px 24px;
+  padding: 2% 5%;
   border-radius: 100px;
   width: 100%;
   background-color: var(--ThemeColor, #F4D42D);
