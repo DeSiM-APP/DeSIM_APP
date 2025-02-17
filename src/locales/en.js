@@ -66,5 +66,8 @@ export default {
     coverageText: "USA",
     remainingData: "Remaining Data",
     remainingDataText: "3 GB",
+    title: "Review",
+    header: "eSIMs contained",
+    setDate: "Set travel date"
   }
 } 
