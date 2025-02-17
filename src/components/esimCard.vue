@@ -35,7 +35,7 @@
     </div>
     <div class="three-btn">
       <img class="no-share-btn" v-if="btnState.isShare === 'isShare'" src="@/assets/share-btn.png" alt="">
-      <img class="no-share-btn" v-if="btnState.isInstall  === 'isInstall'" src="@/assets/install-btn.png" alt="">
+      <img class="no-install-btn" v-if="btnState.isInstall  === 'isInstall'" src="@/assets/install-btn.png" alt="">
       <img class="no-share-btn" v-if="btnState.isPending === 'isPending'" src="@/assets/pending-btn.png" alt="">
       <img class="no-share-btn" v-if="btnState.isUlsysa === 'isUlsysa'" src="@/assets/ulsysa-btn.png">
     </div>
