@@ -2,7 +2,7 @@
   <div class="login">
     <div class="login-logo">
       <img src="@/assets/esim-logo.png" alt="" class="login-img">
-      <div class="login-one">{{ $t('login.one') }}</div>
+      <img src="@/assets/ONE.png" alt="" class="login-one">
     </div>
     <div class="login-title">{{ $t('login.logintostart') }}</div>
     <div class="xinxi">
@@ -79,13 +79,10 @@ const toPage = (path) => {
       margin-top: 5%;
     }
     .login-one {
-      font-family: Goldman;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 24px;
-      margin-left: 4%;
-      margin-top: 4%;
-      color: #393939;
+      width: 45px;
+      height: 11.5px;
+      margin-left: 2%;
+      margin-top: 6.3%;
     }
   }
   .login-title{

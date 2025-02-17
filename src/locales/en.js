@@ -53,5 +53,18 @@ export default {
   },
   review: {
     title: "eSIM center"
+  },
+  esimCenter: {
+    title: "eSIM center",
+    status: "Status",
+    statusText: "Not generated",
+    generationDate: "Generation date",
+    generationDateText: "01/03/2025",
+    orderID: "Order ID",
+    orderIDText: "ADFW52FG552A2D2G78",
+    coverage: "Coverage",
+    coverageText: "USA",
+    remainingData: "Remaining Data",
+    remainingDataText: "3 GB",
   }
 } 

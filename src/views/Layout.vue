@@ -92,15 +92,20 @@ const onUserCenter = () => {
 
 <style scoped lang="scss">
 .layout {
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  height: 100vh;
 
   .header {
     gap: 8px;
     display: flex;
     padding: 20px;
     align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: white;
 
     .header-left,
     .header-right {
