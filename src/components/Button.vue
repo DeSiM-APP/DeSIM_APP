@@ -1,14 +1,22 @@
 <template>
-  <button class="custom-button" @click="handleClick">
+  <button class="custom-button" @click="handleClick" :disabled="disabled">
     <slot></slot>
   </button>
 </template>
 
 <script setup>
 const emit = defineEmits(['click'])
+const props = defineProps({
+  disabled: {
+    type: Boolean,
+    default: false
+  }
+})
 
 function handleClick() {
-  emit('click')
+  if (!props.disabled) {
+    emit('click')
+  }
 }
 </script>
 
@@ -29,8 +37,13 @@ function handleClick() {
   transition: background-color 0.3s, transform 0.1s;
 }
 
-
-.custom-button:active {
+.custom-button:not(:disabled):active {
   transform: scale(0.99);
+}
+
+.custom-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 </style>

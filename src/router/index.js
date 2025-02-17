@@ -50,7 +50,7 @@ const routes = [
         name: 'Review',
         component: Review,
         meta: {
-          headerTemplate: 'user_center',
+          headerTemplate: 'back-close',
           title: 'review.title'
         }
       }

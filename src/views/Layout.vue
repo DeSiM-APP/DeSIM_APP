@@ -21,7 +21,7 @@
         <div class="header-title">
           {{ title }}
         </div>
-        <div class="header-right">
+        <div class="header-right group-right">
           <button class="header-btn" @click="onSwitchLanguage">
             <Language />
           </button>
@@ -110,7 +110,7 @@ const onUserCenter = () => {
       align-items: center;
       justify-content: center;
     }
-    .header-right {
+    .group-right {
       gap: 12px;
       width: 120px;
     }
