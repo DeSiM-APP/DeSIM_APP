@@ -70,6 +70,7 @@ const props = defineProps({
   border-radius: 16px;
   padding: 16px;
   background-color: #F7F9FC;
+  margin-top: 5%;
   .one {
     width: 100%;
     height: 48px;

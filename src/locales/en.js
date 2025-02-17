@@ -69,6 +69,8 @@ export default {
     title: "Review",
     header: "eSIMs contained",
     setDate: "Set travel date",
-    buttonIpt: 'Import'
+    buttonIpt: 'Import',
+    myesim: 'My eSIM',
+    archived: 'Archived'
   }
 } 
