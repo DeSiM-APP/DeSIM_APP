@@ -16,7 +16,26 @@
           </button>
         </div>
       </template>
-
+      <template v-else-if="headerTemplate === 'back'">
+        <div class="header-left">
+          <button @click="onBack">
+            <Back />
+          </button>
+        </div>
+        <div class="header-title">
+          {{ title }}
+        </div>
+      </template>
+      <template v-else-if="headerTemplate === 'close'">
+        <div class="header-title">
+          {{ title }}
+        </div>
+        <div class="header-right">
+          <button @click="onClose">
+            <Close />
+          </button>
+        </div>
+      </template>
       <template v-else-if="headerTemplate === 'user_center'">
         <div class="header-title">
           {{ title }}
@@ -199,7 +218,7 @@ const onUserCenter = () => {
   overflow-x: hidden;
   padding: 24px;
   padding-top: 0;
-  
+
   .group-item {
     display: flex;
     flex-direction: column;
@@ -209,24 +228,30 @@ const onUserCenter = () => {
     width: 100%;
     border-radius: 16px;
     background-color: #f7f9fc;
-    & > div {
+
+    &>div {
       width: 100%;
       display: flex;
     }
+
     .user-info {
       gap: 12px;
       align-items: start;
       justify-content: start;
+
       img {
         width: 39px;
         height: 39px;
       }
+
       .user-name {
         font-weight: 600;
         font-size: 16px;
       }
     }
-    .user-status, .user-number {
+
+    .user-status,
+    .user-number {
       justify-content: space-between;
       height: 19px;
       font-size: 14px;
@@ -235,14 +260,17 @@ const onUserCenter = () => {
       label {
         font-weight: 400;
       }
+
       span {
         text-transform: uppercase;
         font-weight: 600;
       }
     }
+
     .user-status span {
       color: #FFB61D;
     }
+
     .user-number span {
       color: #6C7278;
     }

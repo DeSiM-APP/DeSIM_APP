@@ -80,5 +80,9 @@ export default {
     buttonIpt: 'Import',
     myesim: 'My eSIM',
     archived: 'Archived'
+  },
+  tutorial: {
+    title: '3 steps to install eSIM',
+    buttonText: 'Close'
   }
 } 

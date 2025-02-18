@@ -6,7 +6,8 @@ import Layout from '@/views/Layout.vue'                // Layout 组件
 import Home from '@/views/home/Home.vue';             // 主页，对应路由 "/home"
 import Import from '@/views/import/Import.vue';     // 导入订单页面，对应路由 "/import"
 import Review from '@/views/review/Review.vue';       // 预览页面，对应路由 "/preview"
-import esimCenter from '@/views/esimCenter/esimCenter.vue';       // esim详情，对应路由 "/esimCenter"
+import esimCenter from '@/views/esimCenter/esimCenter.vue';
+import Tutorial from '@/views/tutorial/Tutorial.vue';       // esim详情，对应路由 "/esimCenter"
 
 const routes = [
   {
@@ -64,6 +65,15 @@ const routes = [
           title: 'esimCenter.title'
         }
       },
+      {
+        path: 'tutorial',
+        name: 'Tutorial',
+        component: Tutorial,
+        meta: {
+          headerTemplate: 'back',
+          title: 'tutorial.title'
+        }
+      }
     ]
   }
 ];

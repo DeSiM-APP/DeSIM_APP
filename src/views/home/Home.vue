@@ -7,7 +7,7 @@
       <h2>{{ $t('home.card1.title') }}</h2>
       <p>{{ $t('home.card1.content') }}</p>
     </Card>
-    <Card>
+    <Card @click="toPage('/tutorial')">
       <div class="round">
         <Scan />
       </div>
