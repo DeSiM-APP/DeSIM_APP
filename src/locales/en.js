@@ -83,6 +83,9 @@ export default {
   },
   tutorial: {
     title: '3 steps to install eSIM',
-    buttonText: 'Close'
+    buttonText: 'Close',
+    step1: 'Step 1 QR Code Activation',
+    step2: 'Step 2 Mobile Data Settings',
+    step3: 'Step 3 Connection Setup'
   }
 } 

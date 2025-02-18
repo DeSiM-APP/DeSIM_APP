@@ -6,36 +6,66 @@
         SIM restrictions, your phone is unlocked. If not, contact your carrier.
       </div>
     </div>
-    <van-steps direction="vertical" :active="0" active-color="#07c160">
-      <van-step>
-        <h3>【City】Status1</h3>
-        <p>2016-07-12 12:40</p>
-      </van-step>
-      <van-step>
-        <h3>【City】Status2</h3>
-        <p>2016-07-11 10:00</p>
-      </van-step>
-      <van-step>
-        <h3>【City】Status3</h3>
-        <p>2016-07-10 09:30</p>
-      </van-step>
-    </van-steps>
+    <Steps>
+      <Step v-for="step in steps" :isActive="step.active" :title="step.title" :key="step.title"
+        @click="handleClick(step.index)">
+        <div class="step-img-box">
+          <img :src="step.img" alt="" />
+        </div>
+      </Step>
+    </Steps>
     <Button @click="onClose">
       {{ $t('tutorial.buttonText') }}
     </Button>
   </div>
 </template>
+
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import Button from '@/components/Button.vue';
-import { Step as VanStep, Steps as VanSteps } from 'vant';
+import Steps from './Steps.vue';
+import Step from './Step.vue';
+import { useI18n } from 'vue-i18n';
+import Step1 from '@/assets/step1.png';
+import Step2 from '@/assets/step2.png';
+import Step3 from '@/assets/step3.png';
+
+const { t } = useI18n();
+
+const steps = ref([
+  {
+    title: t('tutorial.step1'),
+    img: Step1,
+    active: true,
+    index: 0
+  },
+  {
+    title: t('tutorial.step2'),
+    img: Step2,
+    active: false,
+    index: 1
+  },
+  {
+    title: t('tutorial.step3'),
+    img: Step3,
+    active: false,
+    index: 2
+  }
+])
+
+const handleClick = (index) => {
+  steps.value.forEach((step, i) => {
+    step.active = i <= index;
+  });
+}
 
 const router = useRouter();
 const onClose = () => {
   router.back();
 }
 </script>
+
 <style lang="scss" scoped>
 .tutorial {
   padding: 20px;
@@ -58,6 +88,16 @@ const onClose = () => {
     i {
       font-weight: 700;
     }
+  }
+
+  .step-img-box {
+    background-color: #F7F9FC;
+    width: 100%;
+    height: 132px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 </style>
