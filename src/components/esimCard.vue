@@ -65,7 +65,8 @@ const props = defineProps({
 <style scoped lang="scss">
 .esimCard {
   width: 100%;
-  height: 260px;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   border-radius: 16px;
   padding: 16px;
@@ -96,7 +97,7 @@ const props = defineProps({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 2%;
+  // margin-top: 2%;
   .two-text-left {
     font-family: Open Sans;
     font-weight: 400;
@@ -118,7 +119,7 @@ const props = defineProps({
   width: 100%;
   height: 38px;
   gap: 12px;
-  margin-top: 3%;
+  // margin-top: 3%;
   display: flex;
   align-content: center;
   justify-content: end;
