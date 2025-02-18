@@ -66,8 +66,8 @@ const toPage = (path) => {
 .login{
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  padding: 0 24px;
   .login-logo{
     width: 100%;
     height: 22px;
@@ -75,13 +75,11 @@ const toPage = (path) => {
     .login-img{
       width: 108px;
       height: 100%;
-      margin-left: 5%;
       margin-top: 5%;
     }
     .login-one {
       width: 45px;
       height: 11.5px;
-      margin-left: 2%;
       margin-top: 6.3%;
     }
   }
@@ -91,10 +89,9 @@ const toPage = (path) => {
     font-size: 32px;
     line-height: 40px;
     color: #393939;
-    margin-left: -33%;
   }
   .xinxi{
-    width: 342px;
+    width: 100%;
     height: 168px;
     margin-top: 10%;
     .import-label {
@@ -109,7 +106,7 @@ const toPage = (path) => {
   }
   }
   .wjmm{
-    width: 342px;
+    width: 100%;
     height: 17px;
     display: flex;
     justify-content: end;
@@ -118,7 +115,7 @@ const toPage = (path) => {
     color: #EF9C11;
   }
   .or-line{
-    width: 342px;
+    width: 100%;
     text-align: center;
     margin-top: 9%;
     margin-bottom: 24px;
@@ -145,7 +142,7 @@ const toPage = (path) => {
     }
   }
   .login-Goole{
-    width: 90%;
+    width: 100%;
     height: 48px;
     border-radius: 10px;
     border: 1px solid #EFF0F6;
@@ -163,7 +160,7 @@ const toPage = (path) => {
     }
   }
   .login-line{
-    width: 90%;
+    width:100%;
     height: 48px;
     border-radius: 10px;
     border: 1px solid #EFF0F6;
@@ -181,7 +178,7 @@ const toPage = (path) => {
     }
   }
   .login-iphone{
-    width: 90%;
+    width: 100%;
     height: 48px;
     border-radius: 10px;
     border: 1px solid #EFF0F6;
@@ -199,7 +196,7 @@ const toPage = (path) => {
     }
   }
   .login-button2 {
-    width: 342px;
+    width: 100%;
     height: 48px;
     margin-top: 10%;
     font-weight: 400;
@@ -216,7 +213,7 @@ const toPage = (path) => {
     }
   }
   .login-button {
-    width: 342px;
+    width: 100%;
     height: 48px;
     margin-top: 8%;
     font-weight: 400;
