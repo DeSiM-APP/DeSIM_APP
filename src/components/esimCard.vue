@@ -10,7 +10,7 @@
         <img src="@/assets/USA-eSIM-1day.png" alt="">
       </div>
       <div class="one-img3">
-        <Arrow :color="'#000000'" />
+        <Arrow color="#000000" @click="handleArrowClick" />
       </div>
     </div>
     <div class="two-text">
@@ -54,6 +54,7 @@
 import Arrow from '@/components/icons/Arrow.vue'
 import shareButton from "@/components/shareButton.vue";
 import { ref } from 'vue'
+
 const isShow = ref(false)
 const props = defineProps({
   item: {
@@ -61,12 +62,19 @@ const props = defineProps({
     required: true,
   }
 })
-const emits = defineEmits(['shareButtonNow'])
+
+// 更新 defineEmits 以包含新的事件
+const emits = defineEmits(['shareButtonNow', 'arrowClicked'])
+
 const shareButtonIn = () => {
   isShow.value = true;
-  emits('shareButtonNow',isShow.value)
+  emits('shareButtonNow', isShow.value)
 }
 
+// 定义处理 Arrow 点击事件的方法
+const handleArrowClick = () => {
+  emits('arrowClicked')
+}
 </script>
 
 <style scoped lang="scss">

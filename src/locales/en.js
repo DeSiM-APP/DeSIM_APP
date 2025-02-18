@@ -96,7 +96,7 @@ export default {
     ulsysa: 'Ulsysa',
     archived:'Archived',
     dialogText: 'Share failed. Please try again.',
-    sahreTitle: 'Share to',
+    shareTitle: 'Share to',
     esimCenterText:'Send',
   },
   tutorial: {

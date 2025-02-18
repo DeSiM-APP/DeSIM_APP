@@ -9,6 +9,7 @@
     <van-tabs v-model:active="active" color="#EF9C11">
       <van-tab :title="t('esimCenter.myesim')">
         <esimCard
+        @arrowClicked="toPage('/dashboard/1')"
         @shareButtonNow="handleChildShare"
         v-for="item in btnStateArray1"
         :key="item.key" 
@@ -25,7 +26,7 @@
       <img src="@/assets/carbon_add-filled.png" alt="" class="add-btn" @click="toPage('/addEsims')">
       </van-tab>
     </van-tabs>
-    <shareButton v-model="show" :title="t('esimCenter.sahreTitle')">
+    <shareButton v-model="show" :title="t('esimCenter.shareTitle')">
       <div class="share-member">
         <div v-for="(user, index) in shareList" :key="index" class="share-item">
           <div class="user-info">
@@ -38,7 +39,7 @@
           </div>
         </div>
         <div class="register-button">
-          <Button @click="toPage('/login')">{{ $t('esimCenter.esimCenterText') }}</Button>
+          <Button @click="showDialog = true; show = false">{{ $t('esimCenter.esimCenterText') }}</Button>
         </div>
       </div>
     </shareButton>
@@ -48,7 +49,7 @@
 <script setup>
 
 import esimCard from '@/components/esimCard.vue'
-import { ref, onMounted } from 'vue'
+import { ref, watch } from 'vue'
 import { Tab as VanTab, Tabs as VanTabs } from 'vant'
 import shareButton from "@/components/shareButton.vue";
 import { useI18n } from 'vue-i18n'
@@ -64,6 +65,14 @@ const toPage = (path) => {
 // 警告提示是否显示
 const isDialog = ref(true)
 const showDialog = ref(false)
+
+watch(showDialog, (newVal) => {
+  if (newVal) {
+    setTimeout(() => {
+      showDialog.value = false
+    }, 2000)
+  }
+})
 // 卡片的内容
 const btnStateArray1 = [
 {
@@ -151,17 +160,7 @@ const shareList = [
 const handleChildShare = (data) => {
   show.value = data;
 }
-onMounted(() => {
-  // Show dialog with animation
-  setTimeout(() => {
-    showDialog.value = true
-  }, 100)
 
-  // Hide dialog after 2 seconds
-  setTimeout(() => {
-    showDialog.value = false
-  }, 2000)
-})
 </script>
 
 <style scoped lang="scss">
@@ -217,6 +216,7 @@ onMounted(() => {
     }
     .van-tabs__content {
       height: calc(100% - 44px);
+      overflow-x: hidden;
     }
     .van-tabs__line {
       width: 130px
