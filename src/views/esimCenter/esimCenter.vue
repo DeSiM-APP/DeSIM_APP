@@ -2,7 +2,7 @@
   <div class="esimCenter">
     <van-tabs v-model:active="active" color="#EF9C11">
       <van-tab :title="t('esimCenter.myesim')">
-        <esimCard :imgState="imgState1" :btnState="btnState1"></esimCard>
+        <esimCard :imgState="imgState1" :btnState="btnState1" @click="handleClick"></esimCard>
         <esimCard :imgState="imgState2" :btnState="btnState2"></esimCard>
         <esimCard :imgState="imgState3" :btnState="btnState3"></esimCard>
         <esimCard :imgState="imgState3" :btnState="btnState3"></esimCard>
@@ -22,6 +22,8 @@ import esimCard from '@/components/esimCard.vue'
 import { ref } from 'vue'
 import { Tab as VanTab, Tabs as VanTabs } from 'vant'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const active = ref(0)
 // import { useRouter } from 'vue-router'
 const imgState1 = 'isUse'
@@ -45,6 +47,10 @@ const { t } = useI18n()
 // const toPage = (path) => {
 //   router.push(path)
 // }
+
+const handleClick = () => {
+  router.push('/dashboard/1')
+}
 </script>
 
 <style scoped lang="scss">

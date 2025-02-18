@@ -8,6 +8,7 @@ import Import from '@/views/import/Import.vue';     // 导入订单页面，对�
 import Review from '@/views/review/Review.vue';       // 预览页面，对应路由 "/preview"
 import esimCenter from '@/views/esimCenter/esimCenter.vue';
 import Tutorial from '@/views/tutorial/Tutorial.vue';       // esim详情，对应路由 "/esimCenter"
+import Dashboard from '@/views/dashboard/Dashboard.vue';  // 添加 Dashboard 组件导入
 
 const routes = [
   {
@@ -72,6 +73,15 @@ const routes = [
         meta: {
           headerTemplate: 'back',
           title: 'tutorial.title'
+        }
+      },
+      {
+        path: 'dashboard/:id',
+        name: 'Dashboard',
+        component: Dashboard,
+        meta: {
+          headerTemplate: 'back',
+          title: ' '
         }
       }
     ]
