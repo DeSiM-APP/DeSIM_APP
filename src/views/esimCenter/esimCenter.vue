@@ -3,6 +3,7 @@
     <van-tabs v-model:active="active" color="#EF9C11">
       <van-tab :title="t('esimCenter.myesim')">
         <esimCard
+        @click="handleClick"
         v-for="item in btnStateArray1"
         :key="item.key" 
         :item="item"
