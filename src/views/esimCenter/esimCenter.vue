@@ -171,6 +171,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   width: 100%;
+  height: calc(100vh - 67px);
   .fade-enter-active,
   .fade-leave-active {
     transition: opacity 1.5s ease;
@@ -208,9 +209,14 @@ onMounted(() => {
   }
   :deep(.van-tabs) {
     width: 100%;
+    height: inherit;
+    overflow: hidden;
     .van-tabs__wrap {
       border-bottom: 1px solid #D9D9D9;
 
+    }
+    .van-tabs__content {
+      height: calc(100% - 44px);
     }
     .van-tabs__line {
       width: 130px
