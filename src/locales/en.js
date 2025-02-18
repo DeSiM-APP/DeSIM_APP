@@ -79,7 +79,11 @@ export default {
     setDate: "Set travel date",
     buttonIpt: 'Import',
     myesim: 'My eSIM',
-    archived: 'Archived'
+    share: 'Share',
+    install: 'Install',
+    pending: 'Pending',
+    ulsysa: 'Ulsysa',
+    archived:'Archived'
   },
   tutorial: {
     title: '3 steps to install eSIM',

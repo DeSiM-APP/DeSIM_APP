@@ -2,8 +2,8 @@
   <div class="esimCard" >
     <div class="one">
       <div class="one-img1">
-        <img src="@/assets/use-cover.png" alt="" v-if="imgState === 'isUse'">
-        <img src="@/assets/cover.png" alt="" v-else-if="imgState === 'isQrCode'">
+        <img src="@/assets/use-cover.png" alt="" v-if="item.imgState === 'isUse'">
+        <img src="@/assets/cover.png" alt="" v-else-if="item.imgState === 'isQrCode'">
         <img src="@/assets/USB.png" alt="" v-else>
       </div>
       <div class="one-img2">
@@ -34,10 +34,13 @@
       <p class="two-text-right">{{ $t('esimCenter.remainingDataText') }}</p>
     </div>
     <div class="three-btn">
-      <img class="no-share-btn" v-if="btnState.isShare === 'isShare'" src="@/assets/share-btn.png" alt="">
-      <img class="no-install-btn" v-if="btnState.isInstall  === 'isInstall'" src="@/assets/install-btn.png" alt="">
-      <img class="no-share-btn" v-if="btnState.isPending === 'isPending'" src="@/assets/pending-btn.png" alt="">
-      <img class="no-share-btn" v-if="btnState.isUlsysa === 'isUlsysa'" src="@/assets/ulsysa-btn.png">
+      <button class="share-btn" v-if="item.isShare === 'isShare'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >{{ $t('esimCenter.share') }}</button>
+      <button class="share-btn" v-if="item.isInstall  === 'isInstall'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }"   >{{ $t('esimCenter.install') }}</button>
+      <button class="share-btn" v-if="item.isPending === 'isPending'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >{{ $t('esimCenter.pending') }}</button>
+      <button class="ulsya-btn" v-if="item.isUlsysa === 'isUlsysa'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >
+        <img src="@/assets/User-04c.png" alt="">
+        {{ $t('esimCenter.ulsysa') }}
+      </button>
     </div>
     <!-- <slot></slot> -->
   </div>
@@ -45,18 +48,9 @@
 
 <script setup>
 const props = defineProps({
-  imgState: {
-    type: String,
-    default: 'isUse'
-  },
-  btnState: {
+  item: {
     type: Object,
-    default: () => ({
-      isShare: 'isShare',
-      isInstall: 'isInstall',
-      isPending: 'isPending',
-      isUlsysa: 'isUlsysa'
-    })
+    required: true,
   }
 })
 
@@ -97,7 +91,6 @@ const props = defineProps({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // margin-top: 2%;
   .two-text-left {
     font-family: Open Sans;
     font-weight: 400;
@@ -124,18 +117,38 @@ const props = defineProps({
   align-content: center;
   justify-content: end;
   .share-btn {
-    width: 70px;
-    height: 38px;
-    background-color: #F7F9FC;
-    border-radius: 8px;
-  }
-  .no-share-btn {
-    width: 90px;
-    height: 38px;
-    background-color: #F7F9FC;
-    border-radius: 8px;
-  }
+    background-color: #E0E6E9;
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-right: 16px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    gap: 4px;
+    font-family: Open Sans;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19.07px;
+    letter-spacing: -3%;
 
+  }
+  .ulsya-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #E0E6E9;
+    border-radius: 20px;
+    padding-top: 10px;
+    padding-right: 16px;
+    padding-bottom: 10px;
+    padding-left: 16px;
+    gap: 4px;
+    font-family: Open Sans;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19.07px;
+    letter-spacing: -3%;
+
+  }
 }
 }
 

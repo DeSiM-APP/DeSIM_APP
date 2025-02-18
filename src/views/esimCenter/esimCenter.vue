@@ -2,15 +2,20 @@
   <div class="esimCenter">
     <van-tabs v-model:active="active" color="#EF9C11">
       <van-tab :title="t('esimCenter.myesim')">
-        <esimCard :imgState="imgState1" :btnState="btnState1"></esimCard>
-        <esimCard :imgState="imgState2" :btnState="btnState2"></esimCard>
-        <esimCard :imgState="imgState3" :btnState="btnState3"></esimCard>
-        <esimCard :imgState="imgState3" :btnState="btnState3"></esimCard>
-        <esimCard :imgState="imgState3" :btnState="btnState3"></esimCard>
+        <esimCard
+        v-for="item in btnStateArray1"
+        :key="item.key" 
+        :item="item"
+      />
+      <img src="@/assets/carbon_add-filled.png" alt="" class="add-btn">
       </van-tab>
       <van-tab :title="t('esimCenter.archived')">
-        <esimCard :imgState="imgState3" :btnState="btnState3"></esimCard>
-        <esimCard :imgState="imgState3" :btnState="btnState3"></esimCard>
+        <esimCard
+        v-for="item in btnStateArray2"
+        :key="item.key" 
+        :item="item"
+      />
+      <img src="@/assets/carbon_add-filled.png" alt="" class="add-btn">
       </van-tab>
     </van-tabs>
   </div>
@@ -24,20 +29,72 @@ import { Tab as VanTab, Tabs as VanTabs } from 'vant'
 import { useI18n } from 'vue-i18n'
 const active = ref(0)
 // import { useRouter } from 'vue-router'
-const imgState1 = 'isUse'
-const imgState2 = 'isQrCode'
-const imgState3 = 'isOther'
-const btnState1 = {
+const btnStateArray1 = [
+{
       isShare: 'isShare',
       isInstall: 'isInstall',
-    }
-const btnState2 = {
+      isPending:'',
+      isUlsysa:'',
+      imgState: 'isUse',
+      isDisable: false,
+      key: 1
+    },{
+      isShare:'',
       isInstall: 'isInstall',
-      isPending: 'isPending'
+      isPending: 'isPending',
+      isUlsysa:'',
+      imgState: 'isQrCode',
+      isDisable: true,
+      key: 2
+    },
+    {
+      isShare:'',
+      isInstall: '',
+      isPending: '',
+      isUlsysa: 'isUlsysa',
+      imgState: 'isOther',
+      isDisable: true,
+      key: 3
+    },
+    {
+      isShare:'',
+      isInstall: '',
+      isPending: '',
+      isUlsysa: 'isUlsysa',
+      imgState: 'isOther',
+      isDisable: true,
+      key: 4
+    },
+    {
+      isShare:'',
+      isInstall: '',
+      isPending: '',
+      isUlsysa: 'isUlsysa',
+      imgState: 'isOther',
+      isDisable: true,
+      key: 5
     }
-const btnState3 = {
-      isUlsysa: 'isUlsysa'
-    }
+]
+const btnStateArray2 = [
+  {
+      isShare:'',
+      isInstall: '',
+      isPending: '',
+      isUlsysa: 'isUlsysa',
+      imgState: 'isOther',
+      isDisable: true,
+      key: 1
+    },    
+    {
+      isShare:'',
+      isInstall: '',
+      isPending: '',
+      isUlsysa: 'isUlsysa',
+      imgState: 'isOther',
+      isDisable: true,
+      key: 2
+    },
+]
 const { t } = useI18n()
 // const router = useRouter()
 
@@ -70,8 +127,13 @@ const { t } = useI18n()
   :deep(.van-tab__panel) {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: end;
     justify-content: center;
+  }
+  .add-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
   }
 }
 </style>
