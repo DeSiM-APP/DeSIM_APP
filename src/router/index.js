@@ -6,6 +6,7 @@ import Layout from '@/views/Layout.vue'                // Layout 组件
 import Home from '@/views/home/Home.vue';             // 主页，对应路由 "/home"
 import Import from '@/views/import/Import.vue';     // 导入订单页面，对应路由 "/import"
 import Review from '@/views/review/Review.vue';       // 预览页面，对应路由 "/preview"
+import AddEsims from '@/views/addEsims/AddEsims.vue';       // 添加esim卡页面，对应路由 "/addEsims"
 import esimCenter from '@/views/esimCenter/esimCenter.vue';
 import Tutorial from '@/views/tutorial/Tutorial.vue';       // esim详情，对应路由 "/esimCenter"
 import Dashboard from '@/views/dashboard/Dashboard.vue';  // 添加 Dashboard 组件导入
@@ -55,6 +56,15 @@ const routes = [
         meta: {
           headerTemplate: 'back-close',
           title: 'review.title'
+        }
+      },
+      {
+        path: 'addEsims',
+        name: 'AddEsims',
+        component: AddEsims,
+        meta: {
+          // headerTemplate: 'back-close',
+          title: 'addEsims.title'
         }
       },
       {

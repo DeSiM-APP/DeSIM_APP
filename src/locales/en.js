@@ -62,6 +62,17 @@ export default {
     setDate: "Set travel date",
     buttonIpt: 'Import'
   },
+  addEsims: {
+    title: 'Add eSIMs',
+    card1: {
+      title: "Import an order",
+      content: "I have purchased eSIM else where and I'd like to activate an order"
+    },
+    card2: {
+      title: "Yes, I want to activate eSIM",
+      content: "Purchased eSIM on Amazon or our website? Let's activate eSIMs."
+    },
+  },
   esimCenter: {
     title: "eSIM center",
     status: "Status",
@@ -83,7 +94,10 @@ export default {
     install: 'Install',
     pending: 'Pending',
     ulsysa: 'Ulsysa',
-    archived:'Archived'
+    archived:'Archived',
+    dialogText: 'Share failed. Please try again.',
+    sahreTitle: 'Share to',
+    esimCenterText:'Send',
   },
   tutorial: {
     title: '3 steps to install eSIM', 

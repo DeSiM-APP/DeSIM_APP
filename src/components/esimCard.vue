@@ -10,7 +10,7 @@
         <img src="@/assets/USA-eSIM-1day.png" alt="">
       </div>
       <div class="one-img3">
-        <img src="@/assets/left-outline.png" alt="">
+        <Arrow :color="'#000000'" />
       </div>
     </div>
     <div class="two-text">
@@ -34,9 +34,13 @@
       <p class="two-text-right">{{ $t('esimCenter.remainingDataText') }}</p>
     </div>
     <div class="three-btn">
-      <button class="share-btn" v-if="item.isShare === 'isShare'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >{{ $t('esimCenter.share') }}</button>
-      <button class="share-btn" v-if="item.isInstall  === 'isInstall'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }"   >{{ $t('esimCenter.install') }}</button>
-      <button class="share-btn" v-if="item.isPending === 'isPending'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >{{ $t('esimCenter.pending') }}</button>
+      <button class="share-btn" @click="shareButtonIn" v-if="item.isShare === 'isShare'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >
+        {{ $t('esimCenter.share') }}
+      </button>
+      <button class="share-btn" v-if="item.isInstall  === 'isInstall'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >
+        {{ $t('esimCenter.install') }}</button>
+      <button class="share-btn" v-if="item.isPending === 'isPending'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >
+        {{ $t('esimCenter.pending') }}</button>
       <button class="ulsya-btn" v-if="item.isUlsysa === 'isUlsysa'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >
         <img src="@/assets/User-04c.png" alt="">
         {{ $t('esimCenter.ulsysa') }}
@@ -47,12 +51,21 @@
 </template>
 
 <script setup>
+import Arrow from '@/components/icons/Arrow.vue'
+import shareButton from "@/components/shareButton.vue";
+import { ref } from 'vue'
+const isShow = ref(false)
 const props = defineProps({
   item: {
     type: Object,
     required: true,
   }
 })
+const emits = defineEmits(['shareButtonNow'])
+const shareButtonIn = () => {
+  isShow.value = true;
+  emits('shareButtonNow',isShow.value)
+}
 
 </script>
 
