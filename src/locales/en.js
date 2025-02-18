@@ -109,6 +109,13 @@ export default {
   dashboard: {
     emptyData: 'Empty data',
     startPlan: 'Start our eSIM plan and enjoy data!',
-    startPlanButton: 'Start Plan'
+    startPlanButton: 'Start Plan',
+    aboutESIM: 'About eSIM',
+    planDetail: 'Plan detail',
+    starInstruction: 'Star plan instruction',
+    support: 'Contact support',
+    shop: 'Shop SIM',
+    bannerTitle: 'Local recommendations',
+    more: 'More',
   }
 } 

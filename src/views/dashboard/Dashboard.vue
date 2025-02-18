@@ -4,7 +4,7 @@
       <img :src="EmptyImg" alt="empty" />
       <h1>{{ $t('dashboard.emptyData') }}</h1>
       <p>{{ $t('dashboard.startPlan') }}</p>
-      <button class="start-plan-button">
+      <button class="start-plan-button" @click="router.push('/tutorial')">
         <div>
           {{ $t('dashboard.startPlanButton') }}
         </div>
@@ -16,7 +16,27 @@
       </div>
     </div>
     <div class="about-sim">
-      <h2></h2>
+      <h2>{{ $t('dashboard.aboutESIM') }}</h2>
+      <div class="about-list">
+        <div class="capsule about-content" v-for="item in aboutList" :key="item.title">
+          <component :is="item.icon" size="21" />
+          <div class="about-content-title">{{ item.title }}</div>
+        </div>
+      </div>
+    </div>
+    <div class="banner">
+      <div class="banner-header">
+        <h2>{{ $t('dashboard.bannerTitle') }}</h2>
+        <i>{{ $t('dashboard.more') }}</i>
+      </div>
+      <div class="swiper">
+        <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
+          <van-swipe-item>1</van-swipe-item>
+          <van-swipe-item>2</van-swipe-item>
+          <van-swipe-item>3</van-swipe-item>
+          <van-swipe-item>4</van-swipe-item>
+        </van-swipe>
+      </div>
     </div>
   </div>
 </template>
@@ -24,6 +44,33 @@
 <script setup>
 import EmptyImg from '@/assets/empty.png'
 import Arrow from '@/components/icons/Arrow.vue'
+import Detail from '@/components/icons/Detail.vue'
+import Book from '@/components/icons/Book.vue'
+import Support from '@/components/icons/Support.vue'
+import Shop from '@/components/icons/Shop.vue'
+import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+import { Swipe as VanSwipe, SwipeItem as VanSwipeItem } from 'vant'
+const { t } = useI18n()
+const router = useRouter()
+const aboutList = [
+  {
+    icon: Detail,
+    title: t('dashboard.planDetail'),
+  },
+  {
+    icon: Book,
+    title: t('dashboard.starInstruction'),
+  },
+  {
+    icon: Support,
+    title: t('dashboard.support'),
+  },
+  {
+    icon: Shop,
+    title: t('dashboard.shop'),
+  }
+]
 
 </script>
 
@@ -87,12 +134,76 @@ import Arrow from '@/components/icons/Arrow.vue'
 
     }
   }
+
   .about-sim {
+    margin-top: 36px;
+
     h2 {
       font-family: Open Sans;
       font-weight: 600;
       font-size: 16px;
       line-height: 21.79px;
+    }
+
+    .about-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+
+      .about-content {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+
+        .about-content-title {
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 21px;
+
+        }
+      }
+    }
+  }
+
+  .banner {
+    margin-top: 36px;
+
+    .banner-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h2 {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 21.79px;
+
+      }
+
+      i {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 19.07px;
+        color: #6C7278;
+
+      }
+    }
+
+    .swiper {
+      height: 162px;
+      width: 100%;
+      margin-top: 8px;
+
+      .van-swipe-item {
+        color: #fff;
+        border-radius: 16px;
+        font-size: 20px;
+        line-height: 150px;
+        text-align: center;
+        background-color: #39a9ed;
+      }
+
     }
   }
 }
