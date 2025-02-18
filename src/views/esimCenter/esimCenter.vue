@@ -27,6 +27,8 @@ import esimCard from '@/components/esimCard.vue'
 import { ref } from 'vue'
 import { Tab as VanTab, Tabs as VanTabs } from 'vant'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const active = ref(0)
 // import { useRouter } from 'vue-router'
 const btnStateArray1 = [
@@ -102,6 +104,10 @@ const { t } = useI18n()
 // const toPage = (path) => {
 //   router.push(path)
 // }
+
+const handleClick = () => {
+  router.push('/dashboard/1')
+}
 </script>
 
 <style scoped lang="scss">
