@@ -46,7 +46,6 @@ const welcomeBigSynopsis = t('welcome.bigSynopsis');
     }
     .mf {
       width: 65%;
-      height: 65%;
       position: absolute;
       top: 41%;
       left: 34%;
@@ -54,7 +53,6 @@ const welcomeBigSynopsis = t('welcome.bigSynopsis');
     }
     .hy {
       width: 149.25px;
-      height: 73.65px;
       position: absolute;
       top: 61%;
       left: 19%;
@@ -67,7 +65,6 @@ const welcomeBigSynopsis = t('welcome.bigSynopsis');
     font-weight: 700;
     margin-top: 12%;
     line-height: 41.6px;
-    letter-spacing: -2%;
   }
   .welcome-synopsis {
     width: 342px;

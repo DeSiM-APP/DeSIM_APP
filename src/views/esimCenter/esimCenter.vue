@@ -1,7 +1,6 @@
 <template>
   <div class="esimCenter">
-
-    <van-tabs v-model:active="active">
+    <van-tabs v-model:active="active" color="#EF9C11">
       <van-tab :title="t('esimCenter.myesim')">
         <esimCard :imgState="imgState1" :btnState="btnState1"></esimCard>
         <esimCard :imgState="imgState2" :btnState="btnState2"></esimCard>
@@ -54,10 +53,21 @@ const { t } = useI18n()
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  ::v-deep .van-tabs{
+  width: 100%;
+  :deep(.van-tabs) {
     width: 100%;
+    .van-tabs__wrap {
+      border-bottom: 1px solid #D9D9D9;
+
+    }
+    .van-tabs__line {
+      width: 130px
+    }
   }
-  ::v-deep .van-tab__panel{
+  :deep(.van-tabs__content) {
+    padding: 0 24px;
+  }
+  :deep(.van-tab__panel) {
     display: flex;
     flex-direction: column;
     align-items: center;

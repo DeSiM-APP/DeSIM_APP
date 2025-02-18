@@ -45,6 +45,7 @@ const toPage = (path) => {
   align-items: center;
   height: 100%;
   gap: 20px;
+  padding: 20px;
 }
 
 .round {

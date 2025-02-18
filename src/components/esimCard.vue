@@ -64,7 +64,7 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .esimCard {
-  width: 90%;
+  width: 100%;
   height: 260px;
   gap: 12px;
   border-radius: 16px;

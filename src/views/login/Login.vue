@@ -45,7 +45,7 @@
       </div>
     </div>
     <div class="login-button2">
-      <span>{{ $t('login.buttonText') }}</span>
+      <span>{{ $t('login.buttonText')}}&nbsp;</span>
     <router-link to="/register" class="router-link">{{ $t('login.register') }}</router-link>
   </div>
 </div>
@@ -154,11 +154,12 @@ const toPage = (path) => {
     align-items: center;
     justify-content: center;
     .log-Goole{
-      width: 24px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
     }
     .goole-text{
-      margin-left: 3%;
+      margin-left: 10px;
+      font-size: 14px;
     }
   }
   .login-line{
@@ -171,11 +172,12 @@ const toPage = (path) => {
     align-items: center;
     justify-content: center;
     .log-line{
-      width: 24px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
     } 
     .line-text{
-      margin-left: 3%;
+      margin-left: 10px;
+      font-size: 14px;
     }
   }
   .login-iphone{
@@ -188,11 +190,12 @@ const toPage = (path) => {
     align-items: center;
     justify-content: center;
     .log-iphone{
-      width: 24px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
     }
     .iphone-text{
-      margin-left: 3%;
+      margin-left: 10px;
+      font-size: 14px;
     }
   }
   .login-button2 {

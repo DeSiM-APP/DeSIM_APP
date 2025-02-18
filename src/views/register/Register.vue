@@ -25,7 +25,7 @@
       <Button @click="toPage('/login')">{{ $t('register.registerText') }}</Button>
     </div>
     <div class="register-button2">
-      <span>{{ $t('register.buttonText') }}</span>
+      <span>{{ $t('register.buttonText') }}&nbsp;</span>
     <router-link to="/login" class="router-link">{{ $t('login.login') }}</router-link>
   </div>
   </div>

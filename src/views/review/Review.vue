@@ -18,7 +18,8 @@ import ReviewCard from "./ReviewCard.vue";
 import { ref, computed } from "vue";
 import Button from "@/components/Button.vue";
 import { useClickOutside } from "@/utils/utils";
-
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const activeCard = ref(NaN);
 
 const disabled = computed(() => isNaN(activeCard.value))
@@ -46,6 +47,7 @@ const cardList = [
 
 const handleImport = () => {
   console.log(activeCard.value);
+  router.push('/esimCenter')
 };
 
 const updateActive = (e) => {
@@ -55,8 +57,6 @@ const updateActive = (e) => {
   } else {
     activeCard.value = key;
   }
-  console.log();
-  
 };
 
 const onClickOutside = () => {
@@ -70,6 +70,7 @@ useClickOutside(onClickOutside, 'review-card');
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding: 20px;
 }
 h2 {
   font-family: Open Sans;
@@ -81,5 +82,6 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 10px;
 }
 </style>

@@ -56,7 +56,7 @@ const routes = [
         }
       },
       {
-        path: '/esimCenter',
+        path: 'esimCenter',
         name: 'esimCenter',
         component: esimCenter,
         meta: {
