@@ -43,7 +43,7 @@
     <main class="content">
       <router-view></router-view>
     </main>
-    <PopupBottom v-model="show" :title="t('layout.groupTitle')" height="60%">
+    <PopupBottom v-model="show" :title="t('layout.groupTitle')">
       <div class="group-member">
         <div v-for="(user, index) in groupList" :key="index" class="group-item">
           <div class="user-info">
@@ -197,7 +197,9 @@ const onUserCenter = () => {
   gap: 20px;
   width: 100%;
   overflow-x: hidden;
-  padding: 0 24px;
+  padding: 24px;
+  padding-top: 0;
+  
   .group-item {
     display: flex;
     flex-direction: column;

@@ -4,7 +4,9 @@
       <h2>{{ title }}</h2>
       <button @click="show = false" class="close-button"><Close /></button>
     </div>
-    <slot></slot>
+    <div class="popup-content">
+      <slot></slot>
+    </div>
   </Popup>
 </template>
 
@@ -63,5 +65,10 @@ watch(show, (newVal) => {
   font-size: 16px;
   color: black;
   cursor: pointer;
+}
+
+.popup-content {
+  overflow-y: auto;
+  height: calc(100% - 67px); // 60px 是 popup-header 的高度，根据实际情况调整
 }
 </style>
