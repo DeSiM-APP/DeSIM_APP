@@ -43,56 +43,104 @@
     <main class="content">
       <router-view></router-view>
     </main>
+    <PopupBottom v-model="show" :title="t('layout.groupTitle')" height="60%">
+      <div class="group-member">
+        <div v-for="(user, index) in groupList" :key="index" class="group-item">
+          <div class="user-info">
+            <img :src="user.avatar" alt="avatar" class="user-avatar" />
+            <div class="user-name">{{ user.name }}</div>
+          </div>
+          <div class="user-status">
+            <label>{{ t("layout.esimStatus") }}</label>
+            <span>{{ user.status }}</span>
+          </div>
+          <div class="user-number">
+            <label>{{ t("layout.esimNumber") }}</label>
+            <span>{{ user.number }}</span>
+          </div>
+        </div>
+      </div>
+    </PopupBottom>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useI18n } from 'vue-i18n'
-import Back from '@/components/icons/Back.vue'
-import Close from '@/components/icons/Close.vue'
-import Language from '@/components/icons/Language.vue'
-import Support from '@/components/icons/Support.vue'
-import Group from '@/components/icons/Group.vue'
-import { Badge } from 'vant'
+import { computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+import Back from "@/components/icons/Back.vue";
+import Close from "@/components/icons/Close.vue";
+import Language from "@/components/icons/Language.vue";
+import Support from "@/components/icons/Support.vue";
+import Group from "@/components/icons/Group.vue";
+import { Badge } from "vant";
+import PopupBottom from "@/components/PopupBottom.vue";
+import { ref } from "vue";
+import User1 from "@/assets/user1.png";
+import User2 from "@/assets/user2.png";
+import User3 from "@/assets/user3.png";
 
-const route = useRoute()
-const router = useRouter()
-const { t } = useI18n()
+const show = ref(false);
+const route = useRoute();
+const router = useRouter();
+const { t } = useI18n();
 
-const headerTemplate = computed(() => route.meta.headerTemplate || 'default')
+const groupList = [
+  {
+    name: "Ulsysa",
+    avatar: User1,
+    status: "ACTIVATED",
+    number: 77564567892491,
+  },
+  {
+    name: "Licba",
+    avatar: User2,
+    status: "ACTIVATED",
+    number: 77564567892491,
+  },
+  {
+    name: "Jessica",
+    avatar: User3,
+    status: "Installed",
+    number: 77564567892491,
+  },
+];
+const headerTemplate = computed(() => route.meta.headerTemplate || "default");
 
 const title = computed(() =>
-  route.meta.title ? t(route.meta.title) : t('myApp.header')
-)
+  route.meta.title ? t(route.meta.title) : t("myApp.header")
+);
 
 // 返回按钮逻辑
 const onBack = () => {
-  router.back()
-}
+  router.back();
+};
 
 // 关闭按钮逻辑，具体实现可以根据实际需求调整
 const onClose = () => {
-  console.log("关闭按钮点击")
-}
+  console.log("关闭按钮点击");
+};
 
 // 切换语言按钮
 const onSwitchLanguage = () => {
-  console.log("切换语言按钮点击")
-}
+  console.log("切换语言按钮点击");
+};
 
 // 寻找客服按钮
 const onContactService = () => {
-  console.log("寻找客服按钮点击")
-}
+  console.log("寻找客服按钮点击");
+};
 
 // 用户中心按钮
 const onUserCenter = () => {
-  console.log("用户中心按钮点击")
-}
+  show.value = true;
+};
 </script>
-
+<style lang="scss">
+#app .van-overlay {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+</style>
 <style scoped lang="scss">
 .layout {
   height: 100vh;
@@ -126,7 +174,7 @@ const onUserCenter = () => {
       align-items: center;
       justify-content: center;
       border-radius: 100px;
-      background-color: #F8F8F8;
+      background-color: #f8f8f8;
     }
 
     .header-title {
@@ -140,6 +188,62 @@ const onUserCenter = () => {
   .content {
     flex: 1;
     overflow-x: hidden;
+  }
+}
+
+.group-member {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  overflow-x: hidden;
+  padding: 0 24px;
+  .group-item {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    border-radius: 16px;
+    background-color: #f7f9fc;
+    & > div {
+      width: 100%;
+      display: flex;
+    }
+    .user-info {
+      gap: 12px;
+      align-items: start;
+      justify-content: start;
+      img {
+        width: 39px;
+        height: 39px;
+      }
+      .user-name {
+        font-weight: 600;
+        font-size: 16px;
+      }
+    }
+    .user-status, .user-number {
+      justify-content: space-between;
+      height: 19px;
+      font-size: 14px;
+      line-height: 19px;
+
+      label {
+        font-weight: 400;
+      }
+      span {
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+    }
+    .user-status span {
+      color: #FFB61D;
+    }
+    .user-number span {
+      color: #6C7278;
+    }
   }
 }
 </style>

@@ -1,4 +1,9 @@
 export default {
+  layout: {
+    groupTitle: 'Group member',
+    esimStatus: 'eSIM Status',
+    esimNumber: 'eSIM no',
+  },
   welcome: {
     hello: 'Hello world!',
     start: 'Get Started',
