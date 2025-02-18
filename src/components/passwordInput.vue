@@ -5,7 +5,7 @@
       :type="showPassword ? 'text' : 'password'"
       v-model="inputValue"
       @input="handleInput"
-      placeholder="请输入密码"
+      placeholder=""
       autocomplete="new-password"
       @focus="handleFocus"
       @blur="handleBlur"
