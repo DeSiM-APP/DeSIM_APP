@@ -29,7 +29,9 @@
             <Support />
           </button>
           <button class="header-btn" @click="onUserCenter">
-            <Group />
+            <Badge dot>
+              <Group />
+            </Badge>
           </button>
         </div>
       </template>
@@ -53,6 +55,7 @@ import Close from '@/components/icons/Close.vue'
 import Language from '@/components/icons/Language.vue'
 import Support from '@/components/icons/Support.vue'
 import Group from '@/components/icons/Group.vue'
+import { Badge } from 'vant'
 
 const route = useRoute()
 const router = useRouter()
@@ -110,10 +113,12 @@ const onUserCenter = () => {
       align-items: center;
       justify-content: center;
     }
+
     .group-right {
       gap: 12px;
       width: 120px;
     }
+
     .header-btn {
       width: 32px;
       height: 32px;
