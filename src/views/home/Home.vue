@@ -14,7 +14,7 @@
       <h2>{{ $t('home.card2.title') }}</h2>
       <p>{{ $t('home.card2.content') }}</p>
     </Card>
-    <Card bgColor="#DFDFDE" textColor="#000">
+    <Card bgColor="#DFDFDE" textColor="#000" @click="toPage('/esimCenter')">
       <div class="round">
         <Unhappy />
       </div>

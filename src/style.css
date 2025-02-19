@@ -82,5 +82,7 @@ html, body, #app {
 	--Stroke: #EDF1F3;
 	--ThemeColor: #F4D42D;
 	--Grey: #6C7278;
+	/* 修改Vant主题色 */
+	--van-primary-color: var(--ThemeColor);
 }
 

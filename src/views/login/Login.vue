@@ -72,16 +72,9 @@ const toPage = (path) => {
     width: 100%;
     height: 22px;
     display: flex;
-    .login-img{
-      width: 108px;
-      height: 100%;
-      margin-top: 5%;
-    }
-    .login-one {
-      width: 45px;
-      height: 11.5px;
-      margin-top: 6.3%;
-    }
+    gap: 6px;
+    align-items: center;
+    margin-top: 30px;
   }
   .login-title{
     margin-top: 10%;

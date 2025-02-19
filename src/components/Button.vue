@@ -1,13 +1,26 @@
 <template>
-  <button class="custom-button" @click="handleClick" :disabled="disabled">
+  <button 
+    :class="[
+      'custom-button',
+      { 'is-loading': isLoading, 'is-disabled': disabled }
+    ]"
+    @click="handleClick" 
+    :disabled="disabled || isLoading"
+  >
+    <Loading color="#000" v-if="isLoading" size="19px"/>
     <slot></slot>
   </button>
 </template>
 
 <script setup>
+import { Loading } from 'vant'
 const emit = defineEmits(['click'])
 const props = defineProps({
   disabled: {
+    type: Boolean,
+    default: false
+  },
+  isLoading: {
     type: Boolean,
     default: false
   }
@@ -27,6 +40,10 @@ function handleClick() {
   padding: 10px 24px;
   border-radius: 100px;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   background-color: var(--ThemeColor, #F4D42D);
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
@@ -38,12 +55,19 @@ function handleClick() {
 }
 
 .custom-button:not(:disabled):active {
-  transform: scale(0.99);
+  background-color: var(--ThemeColor-dark, #e6c729);
+  box-shadow: 0px 0px 8px 0px #0000001A, 0px 1px 1px 0px #e6c729, 0px 0px 8px 0px #B1C9C833;
 }
 
-.custom-button:disabled {
+.custom-button.is-disabled:not(.is-loading) {
   background-color: #cccccc;
   cursor: not-allowed;
   box-shadow: none;
+}
+
+.custom-button.is-loading {
+  background-color: var(--ThemeColor, #F4D42D);
+  cursor: wait;
+  opacity: 0.8;
 }
 </style>

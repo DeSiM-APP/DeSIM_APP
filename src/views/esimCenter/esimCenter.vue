@@ -1,11 +1,5 @@
 <template>
   <div class="esimCenter">
-    <Transition name="fade">
-      <div class="dialog" v-if="showDialog">
-        <img src="@/assets/si_alert-fill.png" alt="" class="dialog-btn">
-        <p class="dialog-text">{{ $t('esimCenter.dialogText') }}</p>
-      </div>
-    </Transition>
     <van-tabs v-model:active="active" color="#EF9C11">
       <van-tab :title="t('esimCenter.myesim')">
         <esimCard
@@ -15,7 +9,7 @@
         :key="item.key" 
         :item="item"
       />
-      <img src="@/assets/carbon_add-filled.png" alt="" class="add-btn">
+      <img src="@/assets/carbon_add-filled.png" alt="" class="add-btn" @click="toPage('/addEsims')">
       </van-tab>
       <van-tab :title="t('esimCenter.archived')">
         <esimCard
@@ -23,7 +17,7 @@
         :key="item.key" 
         :item="item"
       />
-      <img src="@/assets/carbon_add-filled.png" alt="" class="add-btn" @click="toPage('/addEsims')">
+        <img src="@/assets/carbon_add-filled.png" alt="" class="add-btn" @click="toPage('/addEsims')">
       </van-tab>
     </van-tabs>
     <shareButton v-model="show" :title="t('esimCenter.shareTitle')">
@@ -39,7 +33,7 @@
           </div>
         </div>
         <div class="register-button">
-          <Button @click="showDialog = true; show = false">{{ $t('esimCenter.esimCenterText') }}</Button>
+          <Button @click="handleRegisterClick">{{ $t('esimCenter.esimCenterText') }}</Button>
         </div>
       </div>
     </shareButton>
@@ -47,9 +41,8 @@
 </template>
 
 <script setup>
-
 import esimCard from '@/components/esimCard.vue'
-import { ref, watch } from 'vue'
+import { ref, watch, inject, getCurrentInstance } from 'vue'
 import { Tab as VanTab, Tabs as VanTabs } from 'vant'
 import shareButton from "@/components/shareButton.vue";
 import { useI18n } from 'vue-i18n'
@@ -62,17 +55,32 @@ const active = ref(0)
 const toPage = (path) => {
   router.push(path)
 }
-// 警告提示是否显示
-const isDialog = ref(true)
-const showDialog = ref(false)
 
-watch(showDialog, (newVal) => {
-  if (newVal) {
-    setTimeout(() => {
-      showDialog.value = false
-    }, 2000)
-  }
-})
+
+const handleChildShare = (data) => {
+  show.value = data;
+}
+
+const handleRegisterClick = () => {
+  show.value = false
+}
+
+const { t } = useI18n()
+const shareList = [
+  {
+    name: "Send to Email",
+    content: 'Type email',
+  },
+  {
+    name: "Name on eSIM",
+    content: 'Add a name',
+  },
+  {
+    name: "Notes",
+    content: 'Add a note',
+  },
+];
+
 // 卡片的内容
 const btnStateArray1 = [
 {
@@ -140,26 +148,6 @@ const btnStateArray2 = [
       key: 2
     },
 ]
-const { t } = useI18n()
-const shareList = [
-  {
-    name: "Send to Email",
-    content: 'Type email',
-  },
-  {
-    name: "Name on eSIM",
-    content: 'Add a name',
-  },
-  {
-    name: "Notes",
-    content: 'Add a note',
-  },
-];
-
-
-const handleChildShare = (data) => {
-  show.value = data;
-}
 
 </script>
 
@@ -171,48 +159,12 @@ const handleChildShare = (data) => {
   justify-content: center;
   width: 100%;
   height: calc(100vh - 67px);
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity 1.5s ease;
-  }
-
-  .fade-enter-from,
-  .fade-leave-to {
-    opacity: 0;
-  }
-  .dialog{
-    width: 90%;
-    height: 44px;
-    background-color: #dd2f2c;
-    border-radius: 12px;
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: -14%;  // 添加底部间距
-    z-index: 2;          // 确保在tabs上层
-    position: absolute;
-    top: 9%; 
-    .dialog-btn {
-      width: 20px;
-      height: 20px;
-    }
-    .dialog-text {
-      height: 20px;
-      line-height: 20px;
-      font-size: 14px;
-      font-weight: 400;
-      color: #fff;
-      margin-left: 2%;
-    }
-  }
   :deep(.van-tabs) {
     width: 100%;
     height: inherit;
     overflow: hidden;
     .van-tabs__wrap {
       border-bottom: 1px solid #D9D9D9;
-
     }
     .van-tabs__content {
       height: calc(100% - 44px);
@@ -255,15 +207,7 @@ const handleChildShare = (data) => {
     color: var(--Grey, #6C7278);
   }
   .register-button {
-    width: 342px;
-    height: 48px;
     margin-top: 10%;
-    font-weight: 400;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000;
   }
 }
 }
