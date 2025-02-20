@@ -22,7 +22,9 @@
       <circle class="yellow-circle" cx="150" cy="150" r="100" fill="none" stroke="url(#yellowGradient)"
         stroke-width="23.09" stroke-linecap="round" :stroke-dasharray="getYellowGap()"
         :stroke-dashoffset="getStrokeDashoffset()" />
-
+      <circle class="small-circle" :cx="getSmallCirclePosition().x" :cy="getSmallCirclePosition().y" r="2.3"
+        fill="#fff" />
+      <!-- <circle class="small-circle" r="2.31" fill="red" :cx="getPositionX()" cy="150"></circle> -->
       <!-- 圆环内侧小蓝点 -->
       <circle class="blue-dot" cx="150" cy="150" r="80" fill="none" stroke="#7AD3FF" stroke-width="1"
         stroke-linecap="round" stroke-dasharray="1, 8" />
@@ -39,6 +41,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 const props = defineProps({
   used: {
     type: Number,
@@ -48,6 +51,10 @@ const props = defineProps({
     type: Number,
     default: 100
   }
+});
+
+const progress = computed(() => {
+  return props.used / props.total;
 });
 
 const gapRatio = 0.2
@@ -64,10 +71,23 @@ const getStrokeDashoffset = () => {
 };
 
 const getYellowGap = () => {
-  const usedRatio = (props.used / props.total) * (1 - gapRatio);
+  const usedRatio = (progress.value) * (1 - gapRatio);
   const yellowLength = C * usedRatio;
 
   return `${yellowLength} ${C - yellowLength}`;
+};
+
+const getSmallCirclePosition = () => {
+  const gapDeg = 180 * gapRatio;
+  const startDeg = -gapDeg;
+  const endDeg = -(360 - gapDeg)
+  const deg = startDeg + (progress.value * (endDeg - startDeg));
+  // 将角度转换为弧度
+  const rad = (deg * Math.PI) / 180;
+  const x = 150 + r * Math.sin(rad);
+  const y = 150 + r * Math.cos(rad);
+
+  return { x, y };
 };
 
 
@@ -100,6 +120,7 @@ const getYellowGap = () => {
       line-height: 17.97px;
 
     }
+
   }
 }
 
