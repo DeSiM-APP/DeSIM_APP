@@ -119,3 +119,6 @@ html, body, #app {
 .custom-toast-warning {
 	background-color: #FFBF3F !important;
 }
+.custom-toast-success {
+	background-color: #4CAF50 !important;
+}

@@ -17,7 +17,7 @@ export default {
     iphoneButtonText:'Continue with Apple',
     buttonText: "Don't have an account?",
     forget:'Forgot Password ?',
-    buttonText:'Don’t have an account?     ',
+    buttonText: "Don't have an account?",
     register: "Register" ,
     loginText:'Log in',
     logintostart:'Login to start',
@@ -117,5 +117,18 @@ export default {
     shop: 'Shop SIM',
     bannerTitle: 'Local recommendations',
     more: 'More',
+    countryDays: '{country} eSIM for {count} day | {country} eSIM for {count} days',
+    dataDays: '{data} for {count} day | {data} for {count} days',
+    planDetails: 'Plan details',
+    detailBoard: {
+      coverage: 'Coverage',
+      data: 'Data',
+      validity: 'Validity',
+      esimNumber: 'eSIM No. (TYPE)',
+      smdp: 'SM-DP+Address',
+      activationCode: 'Activation Code',
+      apn: 'APN',
+      operator: 'Operator'
+    }
   }
 } 

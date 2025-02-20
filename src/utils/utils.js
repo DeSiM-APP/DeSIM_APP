@@ -34,7 +34,7 @@ export function useClickOutside(callback, targetClass) {
  * 
  * @param {Object} options - 配置选项
  * @param {string} [options.message=''] - 提示消息
- * @param {string} [options.type='error'] - 提示类型 error warning
+ * @param {string} [options.type='error'] - 提示类型 error warning success
  * @param {number} [options.duration=2000] - 提示持续时间
  * @param {Function} [options.onClick=null] - 按钮点击回调函数
  */
@@ -44,7 +44,7 @@ export const useToast = ({
   duration = 2000,
   onClick = null
 } = {}) => {
-  const textColor = type === 'error' ? '#FFF' : '#000';
+  const textColor = type === 'warning' ? '#000' : '#FFF';
   const buttonHtml = onClick ? `<button style="color: ${textColor};" id="toast-button">Go</button>` : '';
   
   const toast = showToast({
@@ -76,4 +76,32 @@ export const useToast = ({
   }
 
   return toast;
+};
+
+/**
+ * 复制文本到剪贴板
+ * 
+ * @param {string} text - 要复制的文本
+ * @param {Function} [callback] - 复制结果的回调函数，参数为布尔值，表示成功或失败
+ */
+export const useCopy = async (text, callback) => {
+  try {
+    await navigator.clipboard.writeText(text);
+    callback?.(true);
+  } catch (err) {
+    // 降级处理：如果 navigator.clipboard 不可用
+    try {
+      const textarea = document.createElement('textarea');
+      textarea.value = text;
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      callback?.(true);
+    } catch (fallbackErr) {
+      callback?.(false);
+    }
+  }
 };

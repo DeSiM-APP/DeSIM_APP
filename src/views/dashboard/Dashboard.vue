@@ -1,22 +1,60 @@
 <template>
   <div class="dashboard">
     <div class="top-part">
-      <img :src="EmptyImg" alt="empty" />
-      <h1>{{ $t('dashboard.emptyData') }}</h1>
-      <p>{{ $t('dashboard.startPlan') }}</p>
-      <button class="start-plan-button" @click="router.push('/tutorial')">
-        <div>
-          {{ $t('dashboard.startPlanButton') }}
+      <div v-if="esimData.dataTotal === null" class="changeable-dashboard empty-data">
+        <img :src="EmptyImg" alt="empty" />
+        <h1>{{ $t("dashboard.emptyData") }}</h1>
+        <p>{{ $t("dashboard.startPlan") }}</p>
+        <button class="start-plan-button" @click="router.push('/tutorial')">
+          <div>
+            {{ $t("dashboard.startPlanButton") }}
+          </div>
+          <Arrow />
+        </button>
+      </div>
+      <div v-else-if="esimData.dataTotal === 'Unlimited data'" class="changeable-dashboard infinite-data">
+        <div class="capsule infinite-capsule">
+          <div>
+            <div class="content">
+              {{ esimData.dateUsage }}/{{ esimData.dateTotal }}
+            </div>
+            <div class="unit">Days</div>
+          </div>
+          <div>
+            <div class="content">{{ esimData.dataUsage }}</div>
+            <div class="unit">used</div>
+          </div>
         </div>
-        <Arrow />
-      </button>
-      <div class="capsule card-content">
-        <h2>USA eSIM for 1day</h2>
-        <p>3 GB for 1 day</p>
+        <Infinite />
+        <div class="capsule card-content">
+          <div class="left">
+            <h2>
+              {{
+                $t("dashboard.countryDays", {
+                  count: esimData.dateTotal,
+                  country: esimData.country,
+                })
+              }}
+            </h2>
+            <p>
+              {{
+                $t("dashboard.dataDays", {
+                  count: esimData.dateTotal,
+                  data: esimData.dataTotal,
+                })
+              }}
+            </p>
+          </div>
+          <div class="right">
+            <button class="start-btn" @click="showDetail">Plan started</button>
+
+          </div>
+
+        </div>
       </div>
     </div>
     <div class="about-sim">
-      <h2>{{ $t('dashboard.aboutESIM') }}</h2>
+      <h2>{{ $t("dashboard.aboutESIM") }}</h2>
       <div class="about-list">
         <div class="capsule about-content" v-for="item in aboutList" :key="item.title">
           <component :is="item.icon" size="21" />
@@ -26,8 +64,8 @@
     </div>
     <div class="banner">
       <div class="banner-header">
-        <h2>{{ $t('dashboard.bannerTitle') }}</h2>
-        <i>{{ $t('dashboard.more') }}</i>
+        <h2>{{ $t("dashboard.bannerTitle") }}</h2>
+        <i>{{ $t("dashboard.more") }}</i>
       </div>
       <div class="swiper">
         <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
@@ -38,47 +76,79 @@
         </van-swipe>
       </div>
     </div>
+    <DetailCard v-model="show" :detail="detailData" />
   </div>
 </template>
 
 <script setup>
-import EmptyImg from '@/assets/empty.png'
-import Arrow from '@/components/icons/Arrow.vue'
-import Detail from '@/components/icons/Detail.vue'
-import Book from '@/components/icons/Book.vue'
-import Support from '@/components/icons/Support.vue'
-import Shop from '@/components/icons/Shop.vue'
-import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
-import { Swipe as VanSwipe, SwipeItem as VanSwipeItem } from 'vant'
-const { t } = useI18n()
-const router = useRouter()
+import EmptyImg from "@/assets/empty.png";
+import Arrow from "@/components/icons/Arrow.vue";
+import Detail from "@/components/icons/Detail.vue";
+import Book from "@/components/icons/Book.vue";
+import Support from "@/components/icons/Support.vue";
+import Shop from "@/components/icons/Shop.vue";
+import { useI18n } from "vue-i18n";
+import { useRouter, useRoute } from "vue-router";
+import { Swipe as VanSwipe, SwipeItem as VanSwipeItem } from "vant";
+import { onMounted, ref } from "vue";
+import { getESIMDataById } from "@/mock/mockDashboard";
+import Infinite from "@/components/icons/Infinite.vue";
+import DetailCard from "./DetailCard.vue";
+
+const detailData = {
+  coverage: 'USA eSIM',
+  data: '1 day / Total 3.00 GB',
+  validity: '2025-02-25',
+  esimNumber: '77564567892491',
+  smdp: 'sim.express',
+  activationCode: '01238D204C8366F946E62',
+  apn: 'AAAplus + BBB',
+  operator: 'AT& T + Verizon + ??'
+}
+const show = ref(false)
+const showDetail = () => {
+  show.value = true
+}
+const { t } = useI18n();
+const router = useRouter();
+const route = useRoute();
+const esimData = ref({
+  dataUsage: "",
+  dataTotal: "",
+  country: "",
+  day: "",
+  dateUsage: "",
+  dateTotal: "",
+});
+
+onMounted(() => {
+  const id = route.params.id;
+  esimData.value = getESIMDataById(id);
+});
 const aboutList = [
   {
     icon: Detail,
-    title: t('dashboard.planDetail'),
+    title: t("dashboard.planDetail"),
   },
   {
     icon: Book,
-    title: t('dashboard.starInstruction'),
+    title: t("dashboard.starInstruction"),
   },
   {
     icon: Support,
-    title: t('dashboard.support'),
+    title: t("dashboard.support"),
   },
   {
     icon: Shop,
-    title: t('dashboard.shop'),
-  }
-]
-
+    title: t("dashboard.shop"),
+  },
+];
 </script>
-
 <style scoped lang="scss">
 .capsule {
   width: 100%;
   height: 100%;
-  background-color: #F7F9FC;
+  background-color: #f7f9fc;
   border-radius: 16px;
   padding: 16px;
 }
@@ -93,45 +163,125 @@ const aboutList = [
     align-items: center;
     gap: 12px;
 
-    h1 {
-      font-weight: 700;
-      font-size: 24px;
-      line-height: 32.68px;
-
-    }
-
-    p {
-      font-weight: 600;
-      font-size: 12px;
-      line-height: 16.34px;
-      color: #545454;
-    }
-
-    .start-plan-button {
-      width: 115px;
-      height: 46px;
-      gap: 4px;
-      border-radius: 100px;
-      background-color: #000;
-      color: #fff;
-      font-size: 14px;
-      line-height: 19.07px;
+    .changeable-dashboard {
+      width: 100%;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      gap: 12px;
+    }
+
+    .empty-data {
+      h1 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 32.68px;
+      }
+
+      p {
+        font-weight: 600;
+        font-size: 12px;
+        line-height: 16.34px;
+        color: #545454;
+      }
+
+      .start-plan-button {
+        width: 115px;
+        height: 46px;
+        gap: 4px;
+        border-radius: 100px;
+        background-color: #000;
+        color: #fff;
+        font-size: 14px;
+        line-height: 19.07px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+
+    .infinite-data {
+      .infinite-capsule {
+        position: fixed;
+        max-width: 253px;
+        top: 14.5px;
+        right: 50%;
+        transform: translateX(50%);
+        height: 38px;
+        padding: 8px 24px;
+        gap: 48px;
+        border-radius: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &>div {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 7px;
+          flex: 1;
+          height: 16px;
+          line-height: 16px;
+        }
+
+        .content {
+          font-weight: 700;
+          font-size: 16px;
+          color: #ef9c11;
+        }
+
+        .unit {
+          color: #545454;
+          font-weight: 400;
+          font-size: 12px;
+        }
+      }
     }
 
     .card-content {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-weight: 600;
-      justify-content: center;
+      justify-content: space-between;
 
-      h2 {
-        line-height: 22px;
+      .left {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-weight: 600;
+        justify-content: center;
+
+        h2 {
+          line-height: 22px;
+          font-weight: 600;
+          font-size: 16px;
+          color: #000;
+        }
+
+        p {
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 16.34px;
+          color: #545454;
+        }
       }
 
+      .right {
+        display: flex;
+        align-items: end;
+
+        .start-btn {
+          padding: 4px 12px;
+          border-radius: 100px;
+          border: 1px solid #E0E6E9;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 19px;
+
+          &:active {
+            opacity: 0.95;
+          }
+        }
+      }
     }
   }
 
@@ -160,7 +310,6 @@ const aboutList = [
           font-weight: 400;
           font-size: 14px;
           line-height: 21px;
-
         }
       }
     }
@@ -178,15 +327,13 @@ const aboutList = [
         font-weight: 600;
         font-size: 16px;
         line-height: 21.79px;
-
       }
 
       i {
         font-weight: 400;
         font-size: 14px;
         line-height: 19.07px;
-        color: #6C7278;
-
+        color: #6c7278;
       }
     }
 
@@ -203,7 +350,6 @@ const aboutList = [
         text-align: center;
         background-color: #39a9ed;
       }
-
     }
   }
 }

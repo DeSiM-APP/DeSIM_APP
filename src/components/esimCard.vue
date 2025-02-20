@@ -74,7 +74,7 @@ const shareButtonIn = () => {
 
 // 定义处理 Arrow 点击事件的方法
 const handleArrowClick = () => {
-  emits('arrowClicked')
+  emits('arrowClicked', props.item.key)
 }
 </script>
 

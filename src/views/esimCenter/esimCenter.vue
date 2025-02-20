@@ -3,7 +3,7 @@
     <van-tabs v-model:active="active" color="#EF9C11">
       <van-tab :title="t('esimCenter.myesim')">
         <esimCard
-        @arrowClicked="toPage('/dashboard/1')"
+        @arrowClicked="arrowClicked"
         @shareButtonNow="handleChildShare"
         v-for="item in btnStateArray1"
         :key="item.key" 
@@ -56,7 +56,9 @@ const toPage = (path) => {
   router.push(path)
 }
 
-
+const arrowClicked = (key) => {
+  toPage(`/dashboard/${key}`)
+}
 const handleChildShare = (data) => {
   show.value = data;
 }
