@@ -16,17 +16,17 @@
       </defs>
 
       <!-- 蓝色圆环 -->
-      <circle class="blue-circle" cx="150" cy="150" r="100" fill="none" stroke="url(#blueGradient)" stroke-width="23.09"
+      <circle class="blue-circle" cx="150" cy="150" :r="r" fill="none" stroke="url(#blueGradient)" :stroke-width="circleWidth"
         stroke-linecap="round" :stroke-dasharray="getGap()" :stroke-dashoffset="getStrokeDashoffset()" />
       <!-- 黄色圆环-->
-      <circle class="yellow-circle" cx="150" cy="150" r="100" fill="none" stroke="url(#yellowGradient)"
-        stroke-width="23.09" stroke-linecap="round" :stroke-dasharray="getYellowGap()"
+      <circle class="yellow-circle" cx="150" cy="150" :r="r" fill="none" stroke="url(#yellowGradient)"
+        :stroke-width="circleWidth" stroke-linecap="round" :stroke-dasharray="getYellowGap()"
         :stroke-dashoffset="getStrokeDashoffset()" />
+      <!-- 圆环内小圆点 -->
       <circle class="small-circle" :cx="getSmallCirclePosition().x" :cy="getSmallCirclePosition().y" r="2.3"
         fill="#fff" />
-      <!-- <circle class="small-circle" r="2.31" fill="red" :cx="getPositionX()" cy="150"></circle> -->
       <!-- 圆环内侧小蓝点 -->
-      <circle class="blue-dot" cx="150" cy="150" r="80" fill="none" stroke="#7AD3FF" stroke-width="1"
+      <circle class="blue-dot" cx="150" cy="150" :r="innerR" fill="none" stroke="#7AD3FF" stroke-width="1"
         stroke-linecap="round" stroke-dasharray="1, 8" />
 
       <!-- 中心文字 -->
@@ -57,9 +57,13 @@ const progress = computed(() => {
   return props.used / props.total;
 });
 
-const gapRatio = 0.2
-const r = 100
-const C = 2 * Math.PI * r;
+const circleWidth = 23.09 // 圆环宽度
+const gapRatio = 0.2 // 底部圆环占圆环宽度的比例
+const r = 100 // 圆环半径
+const C = 2 * Math.PI * r; // 圆环周长
+const innerCircleGap = 6 // 中心圆距离外边圆环的距离
+
+const innerR = r - circleWidth / 2 - innerCircleGap; // 中心圆半径
 
 const getGap = () => {
   return `${C * (1 - gapRatio)} ${C * gapRatio}`;
