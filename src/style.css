@@ -84,5 +84,38 @@ html, body, #app {
 	--Grey: #6C7278;
 	/* 修改Vant主题色 */
 	--van-primary-color: var(--ThemeColor);
+	--van-toast-position-top-distance: 88px;
 }
 
+/* 设置自定义弹窗样式 */
+.custom-toast {
+	padding: 12px !important;
+	width: calc(100vw - 24px) !important;
+  box-shadow: 0px 0px 12px 0px #0000001F, 0px 0px 4px 0px #0000001F;
+}
+.custom-toast .van-toast__text {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	gap: 8px;
+}
+.custom-toast .van-toast__text div {
+	font-family: SF Pro;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16.71px;
+	flex: 1; 
+	text-align: start
+}
+.custom-toast .van-toast__text button {
+	font-family: SF Pro;
+	font-weight: 510;
+	font-size: 14px;
+	line-height: 16.71px;
+}
+.custom-toast-error {
+	background-color: #DD2F2C !important;
+}
+.custom-toast-warning {
+	background-color: #FFBF3F !important;
+}

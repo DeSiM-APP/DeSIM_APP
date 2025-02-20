@@ -5,13 +5,16 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, onMounted } from 'vue'
-const { proxy } = getCurrentInstance();
-
+import { onMounted } from 'vue';
+import { showErrorToast } from '@/utils/utils';
 onMounted(() => {
-  proxy.$toast.success('操作成功!');
-  // toast.error('操作成功!')
-})
+  showErrorToast({
+  message: '操作失败',
+  type: 'error',
+  duration: 3000,
+  onClick: () => console.log('clicked')
+});
+});
 </script>
 
 <style scoped lang="scss">

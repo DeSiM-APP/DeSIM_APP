@@ -52,10 +52,8 @@
 
 <script setup>
 import Arrow from '@/components/icons/Arrow.vue'
-import shareButton from "@/components/shareButton.vue";
-import { ref } from 'vue'
+import { useToast } from '@/utils/utils'
 
-const isShow = ref(false)
 const props = defineProps({
   item: {
     type: Object,
@@ -67,8 +65,11 @@ const props = defineProps({
 const emits = defineEmits(['shareButtonNow', 'arrowClicked'])
 
 const shareButtonIn = () => {
-  isShow.value = true;
-  emits('shareButtonNow', isShow.value)
+  useToast({
+    message: 'Share failed. Please try again.',
+    type: 'error',
+    duration: 2000,
+  })
 }
 
 // 定义处理 Arrow 点击事件的方法
