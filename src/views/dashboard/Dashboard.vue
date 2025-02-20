@@ -51,7 +51,7 @@
         </div>
       </div>
       <div v-else-if="esimData.dateTotal === 1" class="changeable-dashboard one-day-data">
-        <CircularProgress :used="2.6" total="3"  />
+        <CircularProgress :used="1.8" total="4"  />
         <div class="capsule card-content">
           <div class="left">
             <h2>
