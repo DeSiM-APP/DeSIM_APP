@@ -47,9 +47,33 @@
           </div>
           <div class="right">
             <button class="start-btn" @click="showDetail">Plan started</button>
-
           </div>
-
+        </div>
+      </div>
+      <div v-else-if="esimData.dateTotal === 1" class="changeable-dashboard one-day-data">
+        <CircularProgress used="2.6G" total="3G" :percentage="10" />
+        <div class="capsule card-content">
+          <div class="left">
+            <h2>
+              {{
+                $t("dashboard.countryDays", {
+                  count: esimData.dateTotal,
+                  country: esimData.country,
+                })
+              }}
+            </h2>
+            <p>
+              {{
+                $t("dashboard.dataDays", {
+                  count: esimData.dateTotal,
+                  data: esimData.dataTotal,
+                })
+              }}
+            </p>
+          </div>
+          <div class="right">
+            <button class="start-btn" @click="showDetail">Plan started</button>
+          </div>
         </div>
       </div>
     </div>
@@ -69,10 +93,34 @@
       </div>
       <div class="swiper">
         <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-          <van-swipe-item>1</van-swipe-item>
-          <van-swipe-item>2</van-swipe-item>
-          <van-swipe-item>3</van-swipe-item>
-          <van-swipe-item>4</van-swipe-item>
+          <van-swipe-item>
+            <img :src="swiper" alt="" />
+            <div class="swipe-text">
+              <h2>Local tour</h2>
+              <h1>Official Miami Millionaires Sightseeing Cruise</h1>
+            </div>
+          </van-swipe-item>
+          <van-swipe-item>
+            <img :src="swiper" alt="" />
+            <div class="swipe-text">
+              <h2>Local tour</h2>
+              <h1>Official Miami Millionaires Sightseeing Cruise</h1>
+            </div>
+          </van-swipe-item>
+          <van-swipe-item>
+            <img :src="swiper" alt="" />
+            <div class="swipe-text">
+              <h2>Local tour</h2>
+              <h1>Official Miami Millionaires Sightseeing Cruise</h1>
+            </div>
+          </van-swipe-item>
+          <van-swipe-item>
+            <img :src="swiper" alt="" />
+            <div class="swipe-text">
+              <h2>Local tour</h2>
+              <h1>Official Miami Millionaires Sightseeing Cruise</h1>
+            </div>
+          </van-swipe-item>
         </van-swipe>
       </div>
     </div>
@@ -94,6 +142,8 @@ import { onMounted, ref } from "vue";
 import { getESIMDataById } from "@/mock/mockDashboard";
 import Infinite from "@/components/icons/Infinite.vue";
 import DetailCard from "./DetailCard.vue";
+import swiper from "@/assets/swiper.png";
+import CircularProgress from "./CircularProgress.vue";
 
 const detailData = {
   coverage: 'USA eSIM',
@@ -344,11 +394,50 @@ const aboutList = [
 
       .van-swipe-item {
         color: #fff;
+        overflow: hidden;
+        width: 100%;
+        height: 162px;
         border-radius: 16px;
-        font-size: 20px;
-        line-height: 150px;
-        text-align: center;
-        background-color: #39a9ed;
+        position: relative;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .swipe-text {
+          position: absolute;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: fit-content;
+          z-index: 1;
+
+          h2 {
+            font-weight: 600;
+            font-size: 12px;
+            line-height: 16.34px;
+            white-space: nowrap;
+          }
+
+          h1 {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 19.07px;
+            white-space: nowrap;
+          }
+        }
       }
     }
   }
