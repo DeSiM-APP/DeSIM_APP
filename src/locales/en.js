@@ -119,6 +119,7 @@ export default {
     more: 'More',
     countryDays: '{country} eSIM for {count} day | {country} eSIM for {count} days',
     dataDays: '{data} for {count} day | {data} for {count} days',
+    dataDay: '{data} for {count} days | {data} for {count} day',
     planDetails: 'Plan details',
     detailBoard: {
       coverage: 'Coverage',

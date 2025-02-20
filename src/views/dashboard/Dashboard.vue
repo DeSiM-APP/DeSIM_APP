@@ -38,7 +38,7 @@
             </h2>
             <p>
               {{
-                $t("dashboard.dataDays", {
+                $t("dashboard.dataDay", {
                   count: esimData.dateTotal,
                   data: esimData.dataTotal,
                 })
@@ -65,6 +65,32 @@
             <p>
               {{
                 $t("dashboard.dataDays", {
+                  count: esimData.dateTotal,
+                  data: esimData.dataTotal,
+                })
+              }}
+            </p>
+          </div>
+          <div class="right">
+            <button class="start-btn" @click="showDetail">Plan started</button>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="esimData.dateTotal === 4" class="changeable-dashboard four-day-data">
+        <barChar />
+        <div class="capsule card-content">
+          <div class="left">
+            <h2>
+              {{
+                $t("dashboard.countryDays", {
+                  count: esimData.dateTotal,
+                  country: esimData.country,
+                })
+              }}
+            </h2>
+            <p>
+              {{
+                $t("dashboard.dataDay", {
                   count: esimData.dateTotal,
                   data: esimData.dataTotal,
                 })
@@ -144,6 +170,7 @@ import Infinite from "@/components/icons/Infinite.vue";
 import DetailCard from "./DetailCard.vue";
 import swiper from "@/assets/swiper.png";
 import CircularProgress from "./CircularProgress.vue";
+import barChar from "./barChar.vue";
 
 const detailData = {
   coverage: 'USA eSIM',

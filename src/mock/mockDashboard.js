@@ -30,6 +30,14 @@ const mockESIMData = {
     day: 1,
     dateUsage: 2,
     dateTotal: 30
+  },
+  5: {
+    dataUsage: '3GB',
+    dataTotal: '3GB',
+    country: 'USA',
+    day: 4,
+    dateUsage: 2,
+    dateTotal: 4
   }
 };
 
