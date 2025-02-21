@@ -78,6 +78,8 @@ export default {
     status: "Status",
     statusText: "Not generated",
     generationDate: "Generation date",
+    activateExpireDate: "Activation expiry date",
+    expireDate: "Usage expiry date    ",
     generationDateText: "01/03/2025",
     orderID: "Order ID",
     orderIDText: "ADFW52FG552A2D2G78",

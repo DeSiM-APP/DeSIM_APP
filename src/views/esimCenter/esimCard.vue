@@ -1,81 +1,123 @@
 <template>
-  <div class="esimCard" >
-    <div class="one">
-      <div class="one-img1">
-        <img src="@/assets/use-cover.png" alt="" v-if="item.imgState === 'isUse'">
-        <img src="@/assets/cover.png" alt="" v-else-if="item.imgState === 'isQrCode'">
-        <img src="@/assets/USB.png" alt="" v-else>
+  <div class="esimCard">
+    <div class="header">
+      <div class="cover">
+        <div class="clock-cover" v-if="isImageLoaded && item.status === 1">
+          <Clock />
+        </div>
+        <Image :src="item.cover" :alt="item.name" width="48px" height="48px" fit="cover" @load="isImageLoaded = true" />
       </div>
-      <div class="one-img2">
-        <img src="@/assets/USA-eSIM-1day.png" alt="">
+      <div class="title">
+        {{ item.name }}
       </div>
-      <div class="one-img3">
-        <Arrow color="#000000" @click="handleArrowClick" />
-      </div>
+      <CardArrow :color="isDisable ? '#C4C4C4' : '#000'" @click="handleArrowClick" />
     </div>
-    <div class="two-text">
-      <p class="two-text-left">{{ $t('esimCenter.status') }}</p>
-      <p class="two-text-right">{{ $t('esimCenter.statusText') }}</p>
+    <div class="detail-content">
+      <p class="detail-content-left">{{ $t("esimCenter.status") }}</p>
+      <p class="detail-content-right" :style="{ color: textColor }">
+        {{ statusMap[item.status] }}
+      </p>
     </div>
-    <div class="two-text">
-      <p class="two-text-left">{{ $t('esimCenter.generationDate') }}</p>
-      <p class="two-text-right">{{ $t('esimCenter.generationDateText') }}</p>
+    <div class="detail-content" v-if="item.status === 1">
+      <p class="detail-content-left">{{ $t("esimCenter.generationDate") }}</p>
+      <p class="detail-content-right">{{ formatDate(item.generationDate) }}</p>
     </div>
-    <div class="two-text">
-      <p class="two-text-left">{{ $t('esimCenter.orderID') }}</p>
-      <p class="two-text-right">{{ $t('esimCenter.orderIDText') }}</p>
+    <div class="detail-content" v-else-if="item.status === 2 || item.status === 3">
+      <p class="detail-content-left">
+        {{ $t("esimCenter.activateExpireDate") }}
+      </p>
+      <p class="detail-content-right">
+        {{ formatDate(item.activateExpireDate) }}
+      </p>
     </div>
-    <div class="two-text">
-      <p class="two-text-left">{{ $t('esimCenter.coverage') }}</p>
-      <p class="two-text-right">{{ $t('esimCenter.coverageText') }}</p>
+    <div class="detail-content" v-else>
+      <p class="detail-content-left">{{ $t("esimCenter.expireDate") }}</p>
+      <p class="detail-content-right">{{ formatDate(item.expireDate) }}</p>
     </div>
-    <div class="two-text">
-      <p class="two-text-left">{{ $t('esimCenter.remainingData') }}</p>
-      <p class="two-text-right">{{ $t('esimCenter.remainingDataText') }}</p>
+    <div class="detail-content">
+      <p class="detail-content-left">{{ $t("esimCenter.orderID") }}</p>
+      <p class="detail-content-right">{{ item.orderId }}</p>
     </div>
-    <div class="three-btn">
-      <button class="share-btn" @click="shareButtonIn" v-if="item.isShare === 'isShare'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >
-        {{ $t('esimCenter.share') }}
-      </button>
-      <button class="share-btn" v-if="item.isInstall  === 'isInstall'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >
-        {{ $t('esimCenter.install') }}</button>
-      <button class="share-btn" v-if="item.isPending === 'isPending'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >
-        {{ $t('esimCenter.pending') }}</button>
-      <button class="ulsya-btn" v-if="item.isUlsysa === 'isUlsysa'" :style="{color: item.isDisable === true ? '#000000' : '#7B8086' }" >
-        <img src="@/assets/User-04c.png" alt="">
-        {{ $t('esimCenter.ulsysa') }}
-      </button>
+    <div class="detail-content">
+      <p class="detail-content-left">{{ $t("esimCenter.coverage") }}</p>
+      <p class="detail-content-right">{{ item.coverage }}</p>
     </div>
-    <!-- <slot></slot> -->
+    <div class="detail-content">
+      <p class="detail-content-left">{{ $t("esimCenter.remainingData") }}</p>
+      <p class="detail-content-right">{{ formatTraffic(item.remainData) }}</p>
+    </div>
+    <div class="bottom-btn" v-if="item.status === 1">
+      <Button class="card-button" @click="handleShare">{{ $t('esimCenter.share') }}</Button>
+      <Button class="card-button" disabled>{{ $t('esimCenter.install') }}</Button>
+    </div>
+    <div class="bottom-btn" v-else-if="item.status === 2">
+      <Button class="card-button" disabled>{{ $t('esimCenter.pending') }}</Button>
+      <Button class="card-button" @click="handleInstall">{{ $t('esimCenter.install') }}</Button>
+    </div>
+    <div class="bottom-btn" v-else>
+      <Button class="card-button avatar-button">
+        <div class="avatar-button-content">
+          <Image :src="item.userAvatar" :alt="item.userName" width="20px" height="20px" radius="35.71px" />
+          <div>{{ item.userName }}</div>
+        </div>
+      </Button>
+    </div>
   </div>
 </template>
 
 <script setup>
-import Arrow from '@/components/icons/Arrow.vue'
-import { useToast } from '@/utils/utils'
+import CardArrow from "@/components/icons/CardArrow.vue";
+import { computed, ref } from "vue";
+import { Image } from "vant";
+import Clock from "@/components/icons/Clock.vue";
+import { statusMap } from "@/mock/mockCardData";
+import { formatDate, formatTraffic } from "@/utils/utils";
+import Button from "@/components/Button.vue";
+import { useRouter } from "vue-router";
+const router = useRouter();
 
 const props = defineProps({
   item: {
     type: Object,
     required: true,
+  },
+});
+
+const isImageLoaded = ref(false);
+
+const isDisable = computed(() => {
+  const { status } = props.item;
+  return status === 1 || status === 2 || status === 5;
+});
+
+const textColor = computed(() => {
+  const { status } = props.item;
+  if (status === 7) {
+    return "#DD2F2C";
+  } else if (status === 3) {
+    return "#FFB61D";
+  } else if (status === 4) {
+    return "#EF9C11";
+  } else {
+    return "";
   }
-})
+});
 
 // 更新 defineEmits 以包含新的事件
-const emits = defineEmits(['shareButtonNow', 'arrowClicked'])
+const emits = defineEmits(["share", "install"]);
 
-const shareButtonIn = () => {
-  useToast({
-    message: 'Share failed. Please try again.',
-    type: 'error',
-    duration: 2000,
-  })
-}
+const handleShare = () => {
+  emits("share", props.item.id);
+};
 
-// 定义处理 Arrow 点击事件的方法
+const handleInstall = () => {
+  emits("install", props.item.id);
+};
+
 const handleArrowClick = () => {
-  emits('arrowClicked', props.item.key)
-}
+  if (isDisable.value) return;
+  router.push(`/dashboard/${props.item.id}`);
+};
 </script>
 
 <style scoped lang="scss">
@@ -86,90 +128,109 @@ const handleArrowClick = () => {
   gap: 12px;
   border-radius: 16px;
   padding: 16px;
-  background-color: #F7F9FC;
-  .one {
+  background-color: #f7f9fc;
+
+  .header {
     width: 100%;
     height: 48px;
     gap: 12px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    .one-img1 {
+    justify-content: space-between;
+
+    .cover {
       width: 48px;
       height: 48px;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+
+      .clock-cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        background-color: #0000004d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      img {
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+      }
     }
+
+    .title {
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 21.79px;
+      flex: 1;
+      text-align: start;
+    }
+
     .one-img2 {
       width: 100%;
       height: 48px;
       line-height: 52px;
       margin-left: 1%;
     }
-    
-}
-.two-text {
-  width: 100%;
-  height: 22px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  .two-text-left {
-    font-family: Open Sans;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 19.07px;
-    color: #6C7278;
   }
-  .two-text-right {
-    font-family: Open Sans;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 19.07px;
-    color: #6C7278;
-  }
-}
-.three-btn {
-  width: 100%;
-  height: 38px;
-  gap: 12px;
-  // margin-top: 3%;
-  display: flex;
-  align-content: center;
-  justify-content: end;
-  .share-btn {
-    background-color: #E0E6E9;
-    border-radius: 20px;
-    padding-top: 10px;
-    padding-right: 16px;
-    padding-bottom: 10px;
-    padding-left: 16px;
-    gap: 4px;
-    font-family: Open Sans;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 19.07px;
-    letter-spacing: -3%;
 
-  }
-  .ulsya-btn {
+  .detail-content {
+    width: 100%;
+    height: 22px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: center;
-    background-color: #E0E6E9;
-    border-radius: 20px;
-    padding-top: 10px;
-    padding-right: 16px;
-    padding-bottom: 10px;
-    padding-left: 16px;
-    gap: 4px;
-    font-family: Open Sans;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 19.07px;
-    letter-spacing: -3%;
 
+    .detail-content-left {
+      font-family: Open Sans;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19.07px;
+      color: #6c7278;
+    }
+
+    .detail-content-right {
+      font-family: Open Sans;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 19.07px;
+      color: #6c7278;
+    }
+  }
+
+  .bottom-btn {
+    width: 100%;
+    height: 38px;
+    gap: 12px;
+    display: flex;
+    align-content: center;
+    justify-content: end;
+
+    .card-button {
+      background-color: #E0E6E9;
+      border: none;
+      box-shadow: none;
+      width: fit-content;
+      font-weight: 600;
+    }
+    .card-button:disabled {
+      color: #7B8086;
+    }
+    .avatar-button {
+      padding: 10px 12px;
+      .avatar-button-content {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
   }
 }
-}
-
-
 </style>

@@ -5,20 +5,30 @@
         <Cross size="32" />
       </Button>
     </div>
-    <van-tabs v-model:active="active" color="#EF9C11">
-      <van-tab :title="t('esimCenter.myesim')">
-        <EsimCard
-          v-for="item in btnStateArray1"
-          @shareButtonNow="handleChildShare"
-          @arrowClicked="arrowClicked"
-          :key="item.key"
-          :item="item"
-        />
-      </van-tab>
-      <van-tab :title="t('esimCenter.archived')">
-        <EsimCard v-for="item in btnStateArray2" :key="item.key" :item="item" />
-      </van-tab>
-    </van-tabs>
+    <Tabs v-model:active="active" color="#EF9C11">
+      <PullRefresh v-model="loading" @refresh="getCards">
+        <Tab :title="t('esimCenter.myesim')">
+          <EsimCard
+            v-for="item in listCards"
+            @share="handleChildShare"
+            @install="handleInstall"
+            :key="item.id"
+            :item="item"
+          />
+        </Tab>
+      </PullRefresh>
+      <PullRefresh v-model="loading" @refresh="getCards">
+        <Tab :title="t('esimCenter.archived')">
+          <EsimCard
+            v-for="item in archivedCards"
+            @share="handleChildShare"
+            @install="handleInstall"
+            :key="item.id"
+            :item="item"
+          />
+        </Tab>
+      </PullRefresh>
+    </Tabs>
     <!-- bottom popup -->
     <PopupBottom v-model="show" :title="t('esimCenter.shareTitle')">
       <div class="share-member">
@@ -44,8 +54,8 @@
 
 <script setup>
 import EsimCard from "./esimCard.vue";
-import { ref, watch, inject, getCurrentInstance } from "vue";
-import { Tab as VanTab, Tabs as VanTabs } from "vant";
+import { ref, onMounted, computed } from "vue";
+import { Tab, Tabs, PullRefresh } from "vant";
 import PopupBottom from "@/components/PopupBottom.vue";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
@@ -53,6 +63,13 @@ import Input from "@/components/Input.vue";
 import Button from "@/components/Button.vue";
 import Cross from "@/components/icons/Cross.vue";
 import { useStore } from "@/store";
+import { cards, asyncGet } from "@/mock";
+
+const listCards = ref([]);
+const loading = ref(false);
+const archivedCards = computed(() =>
+  listCards.value.filter((item) => item.isArchived)
+);
 const store = useStore();
 const show = ref(false);
 const router = useRouter();
@@ -66,16 +83,27 @@ const toAddPage = () => {
   toPage("/addEsims");
 };
 
-const arrowClicked = (key) => {
-  toPage(`/dashboard/${key}`);
+const handleInstall = () => {
+  console.log("install");
 };
-const handleChildShare = (data) => {
-  show.value = data;
+const handleChildShare = () => {
+  show.value = true;
 };
 
 const handleRegisterClick = () => {
   show.value = false;
 };
+
+const getCards = () => {
+  loading.value = true;
+  asyncGet(cards, 1000).then((res) => {
+    listCards.value = res;
+    loading.value = false;
+  });
+};
+onMounted(() => {
+  getCards();
+});
 
 const { t } = useI18n();
 const shareList = [
@@ -90,75 +118,6 @@ const shareList = [
   {
     name: "Notes",
     content: "Add a note",
-  },
-];
-
-// 卡片的内容
-const btnStateArray1 = [
-  {
-    isShare: "isShare",
-    isInstall: "isInstall",
-    isPending: "",
-    isUlsysa: "",
-    imgState: "isUse",
-    isDisable: false,
-    key: 1,
-  },
-  {
-    isShare: "",
-    isInstall: "isInstall",
-    isPending: "isPending",
-    isUlsysa: "",
-    imgState: "isQrCode",
-    isDisable: true,
-    key: 2,
-  },
-  {
-    isShare: "",
-    isInstall: "",
-    isPending: "",
-    isUlsysa: "isUlsysa",
-    imgState: "isOther",
-    isDisable: true,
-    key: 3,
-  },
-  {
-    isShare: "",
-    isInstall: "",
-    isPending: "",
-    isUlsysa: "isUlsysa",
-    imgState: "isOther",
-    isDisable: true,
-    key: 4,
-  },
-  {
-    isShare: "",
-    isInstall: "",
-    isPending: "",
-    isUlsysa: "isUlsysa",
-    imgState: "isOther",
-    isDisable: true,
-    key: 5,
-  },
-];
-const btnStateArray2 = [
-  {
-    isShare: "",
-    isInstall: "",
-    isPending: "",
-    isUlsysa: "isUlsysa",
-    imgState: "isOther",
-    isDisable: true,
-    key: 1,
-  },
-  {
-    isShare: "",
-    isInstall: "",
-    isPending: "",
-    isUlsysa: "isUlsysa",
-    imgState: "isOther",
-    isDisable: true,
-    key: 2,
   },
 ];
 </script>
