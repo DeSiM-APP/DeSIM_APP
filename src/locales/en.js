@@ -106,6 +106,11 @@ export default {
     step2: 'Step 2 Mobile Data Settings',
     step3: 'Step 3 Connection Setup'
   },
+  usagedetail: {
+    title: 'Usage details',
+    leftButton: 'Week',
+    rightButton: 'Month'
+  },
   dashboard: {
     emptyData: 'Empty data',
     startPlan: 'Start our eSIM plan and enjoy data!',

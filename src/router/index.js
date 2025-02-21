@@ -5,6 +5,7 @@ import Register from '@/views/register/Register.vue';     // 注册页面，对�
 import Layout from '@/views/Layout.vue'                // Layout 组件
 import Home from '@/views/home/Home.vue';             // 主页，对应路由 "/home"
 import Import from '@/views/import/Import.vue';     // 导入订单页面，对应路由 "/import"
+import Usagedetail from '@/views/ueagedetail/ueagedetail.vue';     // 导入订单页面，对应路由 "/import"
 import Review from '@/views/review/Review.vue';       // 预览页面，对应路由 "/preview"
 import AddEsims from '@/views/addEsims/AddEsims.vue';       // 添加esim卡页面，对应路由 "/addEsims"
 import esimCenter from '@/views/esimCenter/esimCenter.vue';
@@ -93,7 +94,16 @@ const routes = [
           headerTemplate: 'back',
           title: ' '
         }
-      }
+      },
+      {
+        path: 'usagedetail',
+        name: 'usagedetail',
+        component: Usagedetail,
+        meta: {
+          headerTemplate: 'back',
+          title: 'usagedetail.title'
+        }
+      },
     ]
   }
 ];

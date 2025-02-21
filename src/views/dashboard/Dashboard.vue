@@ -25,7 +25,7 @@
             <div class="unit">used</div>
           </div>
         </div>
-        <Infinite />
+        <Infinite @click="toPage('/usagedetail')"/>
         <div class="capsule card-content">
           <div class="left">
             <h2>
@@ -172,6 +172,15 @@ import swiper from "@/assets/swiper.png";
 import CircularProgress from "./CircularProgress.vue";
 import barChar from "./barChar.vue";
 
+const router = useRouter()
+const toPage = (path) => {
+  router.push(path)
+}
+
+const arrowClicked = (key) => {
+  toPage(`/dashboard/${key}`)
+}
+
 const detailData = {
   coverage: 'USA eSIM',
   data: '1 day / Total 3.00 GB',
@@ -187,7 +196,6 @@ const showDetail = () => {
   show.value = true
 }
 const { t } = useI18n();
-const router = useRouter();
 const route = useRoute();
 const esimData = ref({
   dataUsage: "",
