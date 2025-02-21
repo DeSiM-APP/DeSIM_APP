@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="bar-char"></div> -->
-  <div ref="chartRef" :style="{ width: '100%', height: '300px' }"></div>
+  <div ref="chartRef" :style="{ width: '112%', height: '300px' }"></div>
 </template>
 <script setup>
 import { onBeforeUpdate, onMounted, ref, watch, onUnmounted } from 'vue'
@@ -22,14 +22,6 @@ const option = ref({
   backgroundColor: '#fff',
   tooltip: {
     trigger: 'axis',
-    axisPointer: {
-      type: 'shadow',
-      label:{
-      },
-      shadowStyle: {
-        color: 'rgba(244,212,45,0.1)',
-      },
-    },
     backgroundColor: 'rgba(255,255,255,0)',
     formatter: (params) => {
       return ``;
@@ -61,7 +53,7 @@ const option = ref({
     },
     axisLabel: {
       fontSize: 12,
-      color: "#737373",
+      color: "rgba(84,84,84,1)"
     },
   }, ],
   yAxis: [{
@@ -113,16 +105,13 @@ const option = ref({
     data: props.yData,
     type: "line",
     smooth: false, //平滑曲线显示
-    symbel:{
-      img:lineButton,
-      width: 30,
-      height: 30,
-    },
-    symbolSize: 30,
+    showAllSymbol: false,
+    symbol: 'circle',
+    symbolSize: 22,
     smooth: true,
     lineStyle: {
       normal: {
-        width: 4,
+        width: 3,
         color: {
           type: 'linear',
           colorStops: [{
@@ -137,12 +126,13 @@ const option = ref({
       }
     },
     itemStyle: {
-      normal: {
-        color: "#F4D42D", //折点颜色
-        lineStyle: {
-          color: "#F4D42D", //折线颜色
-        },
-      },
+      color: "#FABB16",
+      borderColor: "#fff",
+      borderWidth: 4,
+      shadowColor: 'rgba(0, 0, 0, .2)',
+      shadowBlur: 0,
+      shadowOffsetY: 2,
+      shadowOffsetX: 2,
     },
     areaStyle: {
       normal: {
@@ -168,46 +158,33 @@ const option = ref({
         false
       ),
     },
-    label: {
-      show: false,
-      fontSize: 12,
-      fontWeight: 'bold',
-      position: 'top',
-      padding: [-5, -5, -5, -5],
-      color: 'Ef9C11',
-      formatter: (params) => {
-        return params.value + 'GB'
-      },
-      rich: {
-        a: {
-          color: 'rgba(239,156,17,1)'
-        }
-      }
     },
-  }, }],
+    label: {
+          show: true,
+          fontSize: 12,
+          fontWeight: 'bold',
+          position: 'top',
+          padding: [-5, -5, -5, -5],
+          color: '#Ef9C11',
+          shadowOffsetX: 5,
+          shadowOffsetY: 10,
+          formatter: (params) => {
+            return params.value + 'GB'
+          },
+          rich: {
+            a: {
+              color: 'rgba(239,156,17,1)',
+              fontSize: 14,
+            }
+          }
+        },
+}],
 })
 
 onMounted(() => {
   const chartDom = chartRef.value
   myChart = echarts.init(chartDom)
   myChart.setOption(option.value)
-
-  myChart.on('mouseover', (params) => {
-    console.log(params,'11111111111')
-    // Update the option to show label for the hovered bar
-    option.value.series[0].data = option.value.series[0].data.map((item, index) => {
-      const value = typeof item === 'object' ? item.value : item
-      return {
-        value: value,
-        label: {
-          show: index === params.dataIndex
-        }
-      }
-    })
-    myChart.setOption(option.value)
-  })
-
-  // Move resize listener here
   window.addEventListener('resize', () => {
     myChart?.resize()
   })
