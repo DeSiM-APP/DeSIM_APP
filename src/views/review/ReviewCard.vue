@@ -21,6 +21,7 @@
 <script setup>
 import { Checkbox, Calendar } from "vant";
 import { ref, watch } from "vue";
+import { formatDate } from "@/utils/utils";
 
 const props = defineProps({
   item: {
@@ -38,7 +39,7 @@ const handleClick = () => {
 };
 
 const onConfirm = (value) => {
-  selectedTime.value = value;
+  selectedTime.value = formatDate(value, "DD-MM-YY");
   showPicker.value = false;
 }
 const emit = defineEmits(["setActiveKey"]);

@@ -125,10 +125,6 @@ const actions = [
     name: "日本語",
     value: "jp",
   },
-  {
-    name: "中文",
-    value: "zh",
-  },
 ];
 const groupList = [
   {

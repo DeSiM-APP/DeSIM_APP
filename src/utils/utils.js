@@ -122,6 +122,9 @@ export const formatDate = (timeStamp, formatter = 'DD/MM/YYYY') => {
  * @returns {string} - 格式化后的流量字符串
  */
 export const formatTraffic = (size) => {
+  if (typeof size !== 'number') {
+    return size;
+  }
   if (size < 1024) {
     return `${size} KB`;
   } else if (size < 1024 * 1024) {
