@@ -64,6 +64,7 @@ import Button from "@/components/Button.vue";
 import Cross from "@/components/icons/Cross.vue";
 import { useStore } from "@/store";
 import { cards, asyncGet } from "@/mock";
+import { useToast } from "@/utils/utils";
 
 const listCards = ref([]);
 const loading = ref(false);
@@ -92,6 +93,13 @@ const handleChildShare = () => {
 
 const handleRegisterClick = () => {
   show.value = false;
+  Math.random() > 0.5 ? useToast({
+    message: 'Share failed. Please try again.',
+    type: "error",
+  }) : useToast({
+    message: 'Share success',
+    type: "success",
+  })
 };
 
 const getCards = () => {

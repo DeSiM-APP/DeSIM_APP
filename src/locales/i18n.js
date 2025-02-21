@@ -15,4 +15,9 @@ const i18n = createI18n({
   messages, // 配置语言包
 })
 
+// 添加切换语言的方法
+export const changeLanguage = (lang) => {
+  i18n.global.locale = lang;
+};
+
 export default i18n 

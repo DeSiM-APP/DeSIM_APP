@@ -80,11 +80,16 @@
         </div>
       </div>
     </PopupBottom>
+    <ActionSheet
+      v-model:show="showAction"
+      :actions="actions"
+      @select="onSelect"
+    />
   </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useI18n } from "vue-i18n";
 import Back from "@/components/icons/Back.vue";
@@ -92,16 +97,18 @@ import Close from "@/components/icons/Close.vue";
 import Language from "@/components/icons/Language.vue";
 import Support from "@/components/icons/Support.vue";
 import Group from "@/components/icons/Group.vue";
-import { Badge } from "vant";
+import { Badge, ActionSheet } from "vant";
 import PopupBottom from "@/components/PopupBottom.vue";
-import { ref } from "vue";
 import User1 from "@/assets/user1.png";
 import User2 from "@/assets/user2.png";
 import User3 from "@/assets/user3.png";
-import { useStore } from '@/store'
-const store = useStore()
+import { useStore } from "@/store";
+import { asyncGet } from "@/mock";
+import { changeLanguage } from "@/locales/i18n";
+const store = useStore();
 
 const show = ref(false);
+const showAction = ref(false);
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
@@ -126,6 +133,17 @@ const groupList = [
     number: 77564567892491,
   },
 ];
+
+const actions = [
+  { name: "English", value: "en" },
+  { name: "日本語", value: "jp" },
+];
+const onSelect = (item) => {
+  changeLanguage(item.value);
+  showAction.value = false;
+};
+const realGroupList = ref([]);
+
 const headerTemplate = computed(() => route.meta.headerTemplate || "default");
 
 const title = computed(() =>
@@ -139,18 +157,18 @@ const onBack = () => {
 
 // 关闭按钮逻辑，具体实现可以根据实际需求调整
 const onClose = () => {
-  const prevRoute = store.closeRoutes.getCloseRoutes
-  if (prevRoute === '') {
-    router.back()
+  const prevRoute = store.closeRoutes.getCloseRoutes;
+  if (prevRoute === "") {
+    router.back();
   } else {
-    router.push(prevRoute)
-    store.closeRoutes.setCloseRoutes('')
+    router.push(prevRoute);
+    store.closeRoutes.setCloseRoutes("");
   }
 };
 
 // 切换语言按钮
 const onSwitchLanguage = () => {
-  console.log("切换语言按钮点击");
+  showAction.value = true;
 };
 
 // 寻找客服按钮
@@ -160,7 +178,10 @@ const onContactService = () => {
 
 // 用户中心按钮
 const onUserCenter = () => {
-  show.value = true;
+  asyncGet(groupList).then((res) => {
+    realGroupList.value = res;
+    show.value = true;
+  });
 };
 </script>
 <style lang="scss">
@@ -237,7 +258,7 @@ const onUserCenter = () => {
     border-radius: 16px;
     background-color: #f7f9fc;
 
-    &>div {
+    & > div {
       width: 100%;
       display: flex;
     }
@@ -276,11 +297,11 @@ const onUserCenter = () => {
     }
 
     .user-status span {
-      color: #FFB61D;
+      color: #ffb61d;
     }
 
     .user-number span {
-      color: #6C7278;
+      color: #6c7278;
     }
   }
 }

@@ -74,7 +74,7 @@ const routes = [
         component: esimCenter,
         meta: {
           headerTemplate: 'user_center',
-          title: 'esimCenter.title'
+          title: 'eSIM Center'
         }
       },
       {
