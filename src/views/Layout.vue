@@ -62,6 +62,7 @@
     <main class="content">
       <router-view></router-view>
     </main>
+    <!-- user-group -->
     <PopupBottom v-model="show" :title="t('layout.groupTitle')">
       <div class="group-member">
         <div v-for="(user, index) in groupList" :key="index" class="group-item">
@@ -80,6 +81,12 @@
         </div>
       </div>
     </PopupBottom>
+    <!-- Locale Setting -->
+    <ActionSheet 
+      v-model:show="showActionSheet" 
+      :actions="actions" 
+      @select="handleLanguageSelect"
+    />
   </div>
 </template>
 
@@ -92,18 +99,37 @@ import Close from "@/components/icons/Close.vue";
 import Language from "@/components/icons/Language.vue";
 import Support from "@/components/icons/Support.vue";
 import Group from "@/components/icons/Group.vue";
-import { Badge } from "vant";
+import { Badge, ActionSheet } from "vant";
 import PopupBottom from "@/components/PopupBottom.vue";
 import { ref } from "vue";
 import User1 from "@/assets/user1.png";
 import User2 from "@/assets/user2.png";
 import User3 from "@/assets/user3.png";
+import { useStore } from '@/store'
+import { changeLanguage } from '@/locales/i18n'
+
+const store = useStore()
 
 const show = ref(false);
+const showActionSheet = ref(false);
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
 
+const actions = [
+  {
+    name: "English",
+    value: "en",
+  },
+  {
+    name: "日本語",
+    value: "jp",
+  },
+  {
+    name: "中文",
+    value: "zh",
+  },
+];
 const groupList = [
   {
     name: "Ulsysa",
@@ -130,19 +156,27 @@ const title = computed(() =>
   route.meta.title ? t(route.meta.title) : t("myApp.header")
 );
 
-// 返回按钮逻辑
 const onBack = () => {
   router.back();
 };
 
-// 关闭按钮逻辑，具体实现可以根据实际需求调整
 const onClose = () => {
-  console.log("关闭按钮点击");
+  const prevRoute = store.closeRoutes.getCloseRoutes
+  if (prevRoute === '') {
+    router.back()
+  } else {
+    router.push(prevRoute)
+    store.closeRoutes.setCloseRoutes('')
+  }
 };
 
-// 切换语言按钮
 const onSwitchLanguage = () => {
-  console.log("切换语言按钮点击");
+  showActionSheet.value = true;
+};
+
+const handleLanguageSelect = (action) => {
+  changeLanguage(action.value);
+  showActionSheet.value = false;
 };
 
 // 寻找客服按钮

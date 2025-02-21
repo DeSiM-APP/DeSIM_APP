@@ -41,6 +41,17 @@ const mockESIMData = {
   }
 };
 
+// 通用的异步获取函数
+export const asyncGet = (data, delay = null) => {
+  const randomDelay = delay || Math.floor(Math.random() * 1500) + 500;
+  
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(data);
+    }, randomDelay);
+  });
+};
+
 // 模拟通过ID查询eSIM数据的函数
 export const getESIMDataById = (id) => {
   return mockESIMData[id] || null;

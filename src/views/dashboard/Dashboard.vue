@@ -51,7 +51,7 @@
         </div>
       </div>
       <div v-else-if="esimData.dateTotal === 1" class="changeable-dashboard one-day-data">
-        <CircularProgress :used="1.8" total="4"  />
+        <CircularProgress :used="dataUsage" :total="dataTotal"  />
         <div class="capsule card-content">
           <div class="left">
             <h2>
@@ -171,6 +171,7 @@ import DetailCard from "./DetailCard.vue";
 import swiper from "@/assets/swiper.png";
 import CircularProgress from "./CircularProgress.vue";
 import barChar from "./barChar.vue";
+import { computed } from "vue";
 
 const router = useRouter()
 const toPage = (path) => {
@@ -206,9 +207,19 @@ const esimData = ref({
   dateTotal: "",
 });
 
+const dataTotal = computed(() => {
+  return esimData.value.dataTotal.split('GB')[0]
+})
+
+const dataUsage = computed(() => {
+  return esimData.value.dataUsage.split('GB')[0]
+})
+
 onMounted(() => {
   const id = route.params.id;
   esimData.value = getESIMDataById(id);
+  console.log(esimData.value);
+  
 });
 const aboutList = [
   {

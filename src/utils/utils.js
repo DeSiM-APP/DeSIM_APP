@@ -1,5 +1,6 @@
 import { onMounted, onUnmounted } from 'vue';
 import { showToast } from 'vant';
+import moment from 'moment';
 
 /**
  * useClickOutside
@@ -103,5 +104,29 @@ export const useCopy = async (text, callback) => {
     } catch (fallbackErr) {
       callback?.(false);
     }
+  }
+};
+
+export const formatDate = (timeStamp, formatter = 'DD/MM/YYYY') => {
+  if (timeStamp === 0 || timeStamp === null || timeStamp === undefined || timeStamp === '') {
+    return timeStamp || '';
+  } else {
+    return moment(timeStamp).format(formatter);
+  }
+}
+
+/**
+ * 格式化流量
+ * 
+ * @param {number} size - 流量大小（单位：KB）
+ * @returns {string} - 格式化后的流量字符串
+ */
+export const formatTraffic = (size) => {
+  if (size < 1024) {
+    return `${size} KB`;
+  } else if (size < 1024 * 1024) {
+    return `${Number.isInteger(size / 1024) ? (size / 1024) : (size / 1024).toFixed(2)} MB`;
+  } else {
+    return `${Number.isInteger(size / (1024 * 1024)) ? (size / (1024 * 1024)) : (size / (1024 * 1024)).toFixed(2)} GB`;
   }
 };

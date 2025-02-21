@@ -69,6 +69,6 @@ watch(show, (newVal) => {
 
 .popup-content {
   overflow-y: auto;
-  height: calc(100% - 67px); // 60px 是 popup-header 的高度，根据实际情况调整
+  height: calc(100% - 67px);
 }
 </style>

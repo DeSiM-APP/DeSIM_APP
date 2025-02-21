@@ -64,7 +64,7 @@ const routes = [
         name: 'AddEsims',
         component: AddEsims,
         meta: {
-          // headerTemplate: 'back-close',
+          headerTemplate: 'close',
           title: 'addEsims.title'
         }
       },
@@ -74,7 +74,7 @@ const routes = [
         component: esimCenter,
         meta: {
           headerTemplate: 'user_center',
-          title: 'esimCenter.title'
+          title: 'eSIM Center'
         }
       },
       {
