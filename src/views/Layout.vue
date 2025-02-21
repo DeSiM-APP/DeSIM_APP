@@ -98,6 +98,8 @@ import { ref } from "vue";
 import User1 from "@/assets/user1.png";
 import User2 from "@/assets/user2.png";
 import User3 from "@/assets/user3.png";
+import { useStore } from '@/store'
+const store = useStore()
 
 const show = ref(false);
 const route = useRoute();
@@ -137,7 +139,13 @@ const onBack = () => {
 
 // 关闭按钮逻辑，具体实现可以根据实际需求调整
 const onClose = () => {
-  console.log("关闭按钮点击");
+  const prevRoute = store.closeRoutes.getCloseRoutes
+  if (prevRoute === '') {
+    router.back()
+  } else {
+    router.push(prevRoute)
+    store.closeRoutes.setCloseRoutes('')
+  }
 };
 
 // 切换语言按钮

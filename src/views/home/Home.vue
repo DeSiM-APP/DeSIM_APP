@@ -1,6 +1,6 @@
 <template>
   <div class="home-page">
-    <Card bgColor="#FABB16" textColor="#000" @click="toPage('/import')">
+    <Card bgColor="#FABB16" textColor="#000" @click="toImport">
       <div class="round">
         <Import />
       </div>
@@ -30,9 +30,14 @@ import Import from '@/components/icons/Import.vue'
 import Scan from '@/components/icons/Scan.vue'
 import Unhappy from '@/components/icons/Unhappy.vue'
 import { useRouter } from 'vue-router'
-
+import { useStore } from '@/store'
+const store = useStore()
 const router = useRouter()
 
+const toImport = () => {
+  store.closeRoutes.setCloseRoutes('/home')
+  router.push('/import')
+}
 const toPage = (path) => {
   router.push(path)
 }

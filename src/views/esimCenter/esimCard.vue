@@ -87,7 +87,6 @@ const handleArrowClick = () => {
   border-radius: 16px;
   padding: 16px;
   background-color: #F7F9FC;
-  margin-top: 5%;
   .one {
     width: 100%;
     height: 48px;
@@ -118,7 +117,6 @@ const handleArrowClick = () => {
     font-weight: 400;
     font-size: 14px;
     line-height: 19.07px;
-    letter-spacing: -3%;
     color: #6C7278;
   }
   .two-text-right {
@@ -126,7 +124,6 @@ const handleArrowClick = () => {
     font-weight: 600;
     font-size: 14px;
     line-height: 19.07px;
-    letter-spacing: 2%;
     color: #6C7278;
   }
 }

@@ -2,7 +2,11 @@
   <button 
     :class="[
       'custom-button',
-      { 'is-loading': isLoading, 'is-disabled': disabled }
+      { 
+        'is-loading': isLoading, 
+        'is-disabled': disabled,
+        'icon-only': iconOnly 
+      }
     ]"
     @click="handleClick" 
     :disabled="disabled || isLoading"
@@ -23,7 +27,11 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false
-  }
+  },
+  iconOnly: {
+    type: Boolean,
+    default: false
+  },
 })
 
 function handleClick() {
@@ -69,5 +77,10 @@ function handleClick() {
   background-color: var(--ThemeColor, #F4D42D);
   cursor: wait;
   opacity: 0.8;
+}
+
+.icon-only {
+  padding: 8px!important;
+  width: fit-content!important;
 }
 </style>

@@ -64,7 +64,7 @@ const routes = [
         name: 'AddEsims',
         component: AddEsims,
         meta: {
-          // headerTemplate: 'back-close',
+          headerTemplate: 'close',
           title: 'addEsims.title'
         }
       },

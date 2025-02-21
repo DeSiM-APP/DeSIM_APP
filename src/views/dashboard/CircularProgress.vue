@@ -16,15 +16,19 @@
       </defs>
 
       <!-- 蓝色圆环 -->
-      <circle class="blue-circle" cx="150" cy="150" :r="r" fill="none" stroke="url(#blueGradient)" :stroke-width="circleWidth"
-        stroke-linecap="round" :stroke-dasharray="getGap()" :stroke-dashoffset="getStrokeDashoffset()" />
+      <circle class="blue-circle" cx="150" cy="150" :r="r" fill="none" stroke="url(#blueGradient)"
+        :stroke-width="circleWidth" stroke-linecap="round" :stroke-dasharray="isAnimationStarted ? getGap() : `0, ${C * 2}`"
+        :stroke-dashoffset="isAnimationStarted ? getStrokeDashoffset() : -90" />
       <!-- 黄色圆环-->
       <circle class="yellow-circle" cx="150" cy="150" :r="r" fill="none" stroke="url(#yellowGradient)"
-        :stroke-width="circleWidth" stroke-linecap="round" :stroke-dasharray="getYellowGap()"
-        :stroke-dashoffset="getStrokeDashoffset()" />
+        :stroke-width="circleWidth" stroke-linecap="round"
+        :stroke-dasharray="isAnimationStarted ? getYellowGap() : `0, ${C * 2}`"
+        :stroke-dashoffset="isAnimationStarted ? getStrokeDashoffset() : -90" />
       <!-- 圆环内小圆点 -->
-      <circle class="small-circle" :cx="getSmallCirclePosition().x" :cy="getSmallCirclePosition().y" r="2.3"
-        fill="#fff" />
+      <circle :class="[
+        'small-circle',
+        { 'show-small-circle': isAnimationStarted }
+      ]" :cx="getSmallCirclePosition().x" :cy="getSmallCirclePosition().y" r="2.3" fill="#fff" />
       <!-- 圆环内侧小蓝点 -->
       <circle class="blue-dot" cx="150" cy="150" :r="innerR" fill="none" stroke="#7AD3FF" stroke-width="1"
         stroke-linecap="round" stroke-dasharray="1, 8" />
@@ -40,8 +44,9 @@
   </div>
 </template>
 
+
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 const props = defineProps({
   used: {
     type: Number,
@@ -95,6 +100,15 @@ const getSmallCirclePosition = () => {
 };
 
 
+const isAnimationStarted = ref(false);
+
+// 当组件挂载后，延时启动动画
+onMounted(() => {
+  setTimeout(() => {
+    isAnimationStarted.value = true;
+  }, 500); // 0.5秒后开始动画
+});
+
 </script>
 
 <style scoped lang="scss">
@@ -106,19 +120,32 @@ const getSmallCirclePosition = () => {
     width: 100%;
     height: 100%;
 
+    circle {
+      transition: stroke-dasharray .3s ease, stroke-dashoffset .3s ease;
+    }
+
     .yellow-circle {
       filter: drop-shadow(0px 3.3px 9.9px rgba(129, 212, 254, 0.25));
+      transition: stroke-dasharray 1.2s ease, stroke-dashoffset .6s ease;
+    }
+
+    .small-circle {
+      transition: opacity 0.3s ease;
+      transition-delay: 1.2s;
+      opacity: 0;
+    }
+
+    .show-small-circle {
+      opacity: 1;
     }
 
     .used-text {
-      font-family: Open Sans;
       font-weight: 700;
       font-size: 38.27px;
       line-height: 52.12px;
     }
 
     .total-text {
-      font-family: Open Sans;
       font-weight: 300;
       font-size: 13.2px;
       line-height: 17.97px;
@@ -126,9 +153,5 @@ const getSmallCirclePosition = () => {
     }
 
   }
-}
-
-circle {
-  transition: stroke-dashoffset 0.3s;
 }
 </style>
