@@ -42,8 +42,8 @@
             </div>
           </div>
         </div>
-        <div class="register-button">
-          <Button @click="handleRegisterClick">{{
+        <div class="share-button">
+          <Button @click="handleShareClick">{{
             $t("esimCenter.esimCenterText")
           }}</Button>
         </div>
@@ -91,14 +91,14 @@ const handleChildShare = () => {
   show.value = true;
 };
 
-const handleRegisterClick = () => {
+const handleShareClick = () => {
   show.value = false;
   Math.random() > 0.5 ? useToast({
+    message: 'Share success.',
+    type: "success",
+  }) : useToast({
     message: 'Share failed. Please try again.',
     type: "error",
-  }) : useToast({
-    message: 'Share success',
-    type: "success",
   })
 };
 
@@ -193,8 +193,8 @@ const shareList = [
       color: var(--Grey, #6c7278);
     }
 
-    .register-button {
-      margin-top: 10%;
+    .share-button {
+      margin-top: 20px;
     }
   }
 

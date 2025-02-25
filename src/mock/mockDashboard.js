@@ -1,4 +1,4 @@
-const mockESIMData = {
+export const mockESIMData = {
   1: {
     dataUsage: null,
     dataTotal: null,
@@ -7,7 +7,7 @@ const mockESIMData = {
     dateUsage: 1,
     dateTotal: 3
   },
-  2: {
+  4: {
     dataUsage: '3GB',
     dataTotal: '3GB',
     country: 'USA',
@@ -23,7 +23,7 @@ const mockESIMData = {
     dateUsage: 1,
     dateTotal: 1
   },
-  4: {
+  5: {
     dataUsage: '24.1GB',
     dataTotal: 'Unlimited data',
     country: 'USA',
@@ -31,7 +31,23 @@ const mockESIMData = {
     dateUsage: 2,
     dateTotal: 30
   },
-  5: {
+  6: {
+    dataUsage: '24.1GB',
+    dataTotal: 'Unlimited data',
+    country: 'USA',
+    day: 1,
+    dateUsage: 2,
+    dateTotal: 30
+  },
+  7: {
+    dataUsage: '3GB',
+    dataTotal: 'error',
+    country: 'USA',
+    day: 4,
+    dateUsage: 2,
+    dateTotal: 4
+  },
+  8: {
     dataUsage: '3GB',
     dataTotal: '3GB',
     country: 'USA',
@@ -41,20 +57,13 @@ const mockESIMData = {
   }
 };
 
-// 通用的异步获取函数
-export const asyncGet = (data, delay = null) => {
-  const randomDelay = delay || Math.floor(Math.random() * 1500) + 500;
-  
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(data);
-    }, randomDelay);
-  });
-};
-
-// 模拟通过ID查询eSIM数据的函数
-export const getESIMDataById = (id) => {
-  return mockESIMData[id] || null;
-};
-
-export default mockESIMData;
+export const detailData = {
+  coverage: 'USA eSIM',
+  data: '1 day / Total 3.00 GB',
+  validity: '2025-02-25',
+  esimNumber: '77564567892491',
+  smdp: 'sim.express',
+  activationCode: '01238D204C8366F946E62',
+  apn: 'AAAplus + BBB',
+  operator: 'AT& T + Verizon + ??'
+}

@@ -5,71 +5,71 @@ export default {
     esimNumber: 'eSIM番号',
   },
   welcome: {
-    hello: 'こんにちは、世界！',
+    hello: 'ようこそ！',
     start: '始める',
-    synopsis: '比類のないカバレッジと便利さで、迅速で信頼性の高いインターネットを体験してください。DeSiM ONEで簡単に接続を維持しましょう。',
-    bigSynopsis: 'eSIMで自由に簡単に旅行しましょう'
+    synopsis: '高速で信頼性の高いインターネットを、比類のないカバレッジと利便性で体験してください。DeSiM ONEで簡単に接続を維持できます。',
+    bigSynopsis: 'eSIMで自由に簡単に旅行'
   },
   login: {
     login: 'ログイン',
-    gooleButtonText: 'Googleで続行',
-    lineButtonText: 'Lineで続行',
-    iphoneButtonText: 'Appleで続行',
-    buttonText: 'アカウントをお持ちでないですか？',
-    forget: 'パスワードを忘れましたか？',
+    gooleButtonText: 'Googleで続ける',
+    lineButtonText: 'LINEで続ける',
+    iphoneButtonText: 'Appleで続ける',
+    forget: 'パスワードをお忘れですか？',
+    buttonText: 'アカウントをお持ちでない方',
     register: '登録',
     loginText: 'ログイン',
-    logintostart: '開始するにはログイン',
+    logintostart: 'ログインして始める',
     or: 'または',
     one: 'ONE',
-    email: 'メール',
+    email: 'メールアドレス',
     password: 'パスワード'
   },
   register: {
     register: '登録',
     registerText: '登録',
-    buttonText: 'すでにアカウントをお持ちですか？',
+    buttonText: 'すでにアカウントをお持ちの方',
     login: 'ログイン',
     usename: 'ユーザー名',
-    email: 'メール',
-    password: 'パスワードを設定'
+    email: 'メールアドレス',
+    password: 'パスワード設定'
   },
   home: {
-    title: 'すでにeSIMをお持ちです',
+    title: 'すでにeSIMをお持ちの方',
     card1: {
-      title: 'はい、注文をインポートしたい',
-      content: '他の場所で購入したeSIMをアクティブにしたい'
+      title: '注文をインポートする',
+      content: '他で購入したeSIMを持っており、注文をアクティベートしたい'
     },
     card2: {
-      title: 'はい、eSIMをアクティブにしたい',
-      content: 'Amazonまたは当社のウェブサイトで購入したeSIMをアクティブにしましょう。'
+      title: 'eSIMをアクティベートする',
+      content: 'AmazonまたはWebサイトで購入したeSIMをアクティベートしましょう'
     },
     card3: {
-      title: 'いいえ、今はスキップ',
-      content: 'eSIMセンターに直接ジャンプしましょう。'
+      title: '今はスキップ',
+      content: 'eSIMセンターに直接進む'
     }
   },
   import: {
-    title: '注文をインポート',
-    label: '注文番号 / 引換コード',
-    placeholder: 'ここにコードを入力',
-    buttonText: '続行'
+    title: '注文のインポート',
+    label: '注文番号/引換コード',
+    placeholder: 'コードを入力してください',
+    buttonText: '続ける'
   },
   review: {
-    title: 'レビュー',
-    header: '含まれているeSIM',
-    setDate: '旅行日を設定',
+    title: '確認',
+    header: '含まれるeSIM',
+    setDate: '利用開始日の設定',
     buttonIpt: 'インポート'
   },
   addEsims: {
     title: 'eSIMを追加',
     card1: {
       title: '注文をインポート',
-      content: '他の場所で購入したeSIMをアクティブにしたい'
+      content: '他で購入したeSIMを持っており、注文をアクティベートしたい'
     },
     card2: {
-      title: 'はい、eSIMをアクティブにしたい',
-      content: 'Amazonまたは当社のウェブサイトで購入したeSIMをアクティブにしましょう。'
+      title: 'eSIMをアクティベート',
+      content: 'AmazonまたはWebサイトで購入したeSIMをアクティベートしましょう'
     },
   },
   esimCenter: {
@@ -77,19 +77,15 @@ export default {
     status: 'ステータス',
     statusText: '未生成',
     generationDate: '生成日',
-    activateExpireDate: 'アクティベーション期限日',
-    expireDate: '使用期限日',
+    activateExpireDate: 'アクティベーション期限',
+    expireDate: '利用期限',
     generationDateText: '2025/03/01',
     orderID: '注文ID',
     orderIDText: 'ADFW52FG552A2D2G78',
     coverage: 'カバレッジ',
     coverageText: 'アメリカ',
-    remainingData: '残りデータ',
+    remainingData: '残りデータ量',
     remainingDataText: '3 GB',
-    title: 'レビュー',
-    header: '含まれているeSIM',
-    setDate: '旅行日を設定',
-    buttonIpt: 'インポート',
     myesim: '私のeSIM',
     share: '共有',
     install: 'インストール',
@@ -101,41 +97,41 @@ export default {
     esimCenterText: '送信',
   },
   tutorial: {
-    title: 'eSIMをインストールするための3つのステップ',
+    title: 'eSIMインストールの3ステップ',
     buttonText: '閉じる',
     step1: 'ステップ1 QRコードアクティベーション',
     step2: 'ステップ2 モバイルデータ設定',
     step3: 'ステップ3 接続設定'
   },
   usagedetail: {
-    title: '使用詳細',
-    leftButton: '週',
-    rightButton: '月'
+    title: '利用詳細',
+    leftButton: '週間',
+    rightButton: '月間'
   },
   dashboard: {
-    emptyData: 'データが空です',
-    startPlan: '私たちのeSIMプランを開始してデータを楽しんでください！',
+    emptyData: 'データなし',
+    startPlan: 'eSIMプランを開始してデータを利用しましょう！',
     startPlanButton: 'プランを開始',
     aboutESIM: 'eSIMについて',
     planDetail: 'プラン詳細',
-    starInstruction: 'プランの指示',
+    starInstruction: 'スタートプラン説明',
     support: 'サポートに連絡',
     shop: 'SIMを購入',
     bannerTitle: 'ローカルおすすめ',
-    more: 'もっと',
-    countryDays: '{country} eSIM {count}日間 | {country} eSIM {count}日間',
-    dataDays: '{data} {count}日間 | {data} {count}日間',
-    dataDay: '{data} {count}日間 | {data} {count}日間',
-    planDetails: 'プランの詳細',
+    more: 'もっと見る',
+    countryDays: '{country}eSIM {count}日間',
+    dataDays: '{data} {count}日間',
+    dataDay: '{data} {count}日間',
+    planDetails: 'プラン詳細',
     detailBoard: {
       coverage: 'カバレッジ',
       data: 'データ',
-      validity: '有効性',
+      validity: '有効期限',
       esimNumber: 'eSIM番号（タイプ）',
       smdp: 'SM-DP+アドレス',
       activationCode: 'アクティベーションコード',
       apn: 'APN',
-      operator: 'オペレーター'
+      operator: '通信事業者'
     }
   }
 } 

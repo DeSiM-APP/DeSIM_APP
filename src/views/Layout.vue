@@ -62,6 +62,7 @@
     <main class="content">
       <router-view></router-view>
     </main>
+    <!-- user-group -->
     <PopupBottom v-model="show" :title="t('layout.groupTitle')">
       <div class="group-member">
         <div v-for="(user, index) in groupList" :key="index" class="group-item">
@@ -80,10 +81,11 @@
         </div>
       </div>
     </PopupBottom>
-    <ActionSheet
-      v-model:show="showAction"
-      :actions="actions"
-      @select="onSelect"
+    <!-- Locale Setting -->
+    <ActionSheet 
+      v-model:show="showActionSheet" 
+      :actions="actions" 
+      @select="handleLanguageSelect"
     />
   </div>
 </template>
@@ -102,17 +104,27 @@ import PopupBottom from "@/components/PopupBottom.vue";
 import User1 from "@/assets/user1.png";
 import User2 from "@/assets/user2.png";
 import User3 from "@/assets/user3.png";
-import { useStore } from "@/store";
-import { asyncGet } from "@/mock";
-import { changeLanguage } from "@/locales/i18n";
-const store = useStore();
+import { useStore } from '@/store'
+import { changeLanguage } from '@/locales/i18n'
+
+const store = useStore()
 
 const show = ref(false);
-const showAction = ref(false);
+const showActionSheet = ref(false);
 const route = useRoute();
 const router = useRouter();
 const { t } = useI18n();
 
+const actions = [
+  {
+    name: "English",
+    value: "en",
+  },
+  {
+    name: "日本語",
+    value: "jp",
+  },
+];
 const groupList = [
   {
     name: "Ulsysa",
@@ -150,12 +162,10 @@ const title = computed(() =>
   route.meta.title ? t(route.meta.title) : t("myApp.header")
 );
 
-// 返回按钮逻辑
 const onBack = () => {
   router.back();
 };
 
-// 关闭按钮逻辑，具体实现可以根据实际需求调整
 const onClose = () => {
   const prevRoute = store.closeRoutes.getCloseRoutes;
   if (prevRoute === "") {
@@ -166,9 +176,13 @@ const onClose = () => {
   }
 };
 
-// 切换语言按钮
 const onSwitchLanguage = () => {
-  showAction.value = true;
+  showActionSheet.value = true;
+};
+
+const handleLanguageSelect = (action) => {
+  changeLanguage(action.value);
+  showActionSheet.value = false;
 };
 
 // 寻找客服按钮

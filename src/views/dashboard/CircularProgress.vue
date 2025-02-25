@@ -13,19 +13,25 @@
           <stop offset="0%" style="stop-color: #F4D42D; stop-opacity: 1" />
           <stop offset="100%" style="stop-color: #FABB16; stop-opacity: 1" />
         </linearGradient>
+        <!-- 定义报错黄色渐变 -->
+        <linearGradient id="errorYellowGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color: rgba(244, 212, 45, 0.3); stop-opacity: 1" />
+          <stop offset="100%" style="stop-color: rgba(250, 187, 22, 0.3); stop-opacity: 1" />
+        </linearGradient>
       </defs>
 
       <!-- 蓝色圆环 -->
-      <circle class="blue-circle" cx="150" cy="150" :r="r" fill="none" stroke="url(#blueGradient)"
-        :stroke-width="circleWidth" stroke-linecap="round" :stroke-dasharray="isAnimationStarted ? getGap() : `0, ${C * 2}`"
+      <circle v-if="!loading" class="blue-circle" cx="150" cy="150" :r="r" fill="none"
+        :stroke="isError ? 'url(#errorYellowGradient)' : 'url(#blueGradient)'" :stroke-width="circleWidth" stroke-linecap="round"
+        :stroke-dasharray="isAnimationStarted ? getGap() : `0, ${C * 2}`"
         :stroke-dashoffset="isAnimationStarted ? getStrokeDashoffset() : -90" />
       <!-- 黄色圆环-->
-      <circle class="yellow-circle" cx="150" cy="150" :r="r" fill="none" stroke="url(#yellowGradient)"
-        :stroke-width="circleWidth" stroke-linecap="round"
+      <circle v-if="!loading && !isError" class="yellow-circle" cx="150" cy="150" :r="r" fill="none"
+        stroke="url(#yellowGradient)" :stroke-width="circleWidth" stroke-linecap="round"
         :stroke-dasharray="isAnimationStarted ? getYellowGap() : `0, ${C * 2}`"
         :stroke-dashoffset="isAnimationStarted ? getStrokeDashoffset() : -90" />
       <!-- 圆环内小圆点 -->
-      <circle :class="[
+      <circle v-if="!isError" :class="[
         'small-circle',
         { 'show-small-circle': isAnimationStarted }
       ]" :cx="getSmallCirclePosition().x" :cy="getSmallCirclePosition().y" r="2.3" fill="#fff" />
@@ -35,10 +41,10 @@
 
       <!-- 中心文字 -->
       <text class="used-text" x="150" y="157" text-anchor="middle">
-        {{ used }}GB
+        {{ !loading && !isError ? `${used}GB` : '--' }}
       </text>
       <text class="total-text" x="150" y="185" text-anchor="middle">
-        /{{ total }}GB
+        /{{ !loading && !isError ? `${total}GB` : '--' }}
       </text>
     </svg>
   </div>
@@ -55,6 +61,14 @@ const props = defineProps({
   total: {
     type: Number,
     default: 100
+  },
+  loading: {
+    type: Boolean,
+    default: false
+  },
+  isError: {
+    type: Boolean,
+    default: false
   }
 });
 

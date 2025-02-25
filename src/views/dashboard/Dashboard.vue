@@ -1,57 +1,12 @@
 <template>
   <div class="dashboard">
     <div class="top-part">
-      <div v-if="esimData.dataTotal === null" class="changeable-dashboard empty-data">
-        <img :src="EmptyImg" alt="empty" />
-        <h1>{{ $t("dashboard.emptyData") }}</h1>
-        <p>{{ $t("dashboard.startPlan") }}</p>
-        <button class="start-plan-button" @click="router.push('/tutorial')">
-          <div>
-            {{ $t("dashboard.startPlanButton") }}
-          </div>
-          <Arrow />
-        </button>
-      </div>
-      <div v-else-if="esimData.dataTotal === 'Unlimited data'" class="changeable-dashboard infinite-data">
-        <div class="capsule infinite-capsule">
-          <div>
-            <div class="content">
-              {{ esimData.dateUsage }}/{{ esimData.dateTotal }}
-            </div>
-            <div class="unit">Days</div>
-          </div>
-          <div>
-            <div class="content">{{ esimData.dataUsage }}</div>
-            <div class="unit">used</div>
-          </div>
-        </div>
-        <Infinite @click="toPage('/usagedetail')"/>
-        <div class="capsule card-content">
-          <div class="left">
-            <h2>
-              {{
-                $t("dashboard.countryDays", {
-                  count: esimData.dateTotal,
-                  country: esimData.country,
-                })
-              }}
-            </h2>
-            <p>
-              {{
-                $t("dashboard.dataDay", {
-                  count: esimData.dateTotal,
-                  data: esimData.dataTotal,
-                })
-              }}
-            </p>
-          </div>
-          <div class="right">
-            <button class="start-btn" @click="showDetail">Plan started</button>
-          </div>
-        </div>
-      </div>
-      <div v-else-if="esimData.dateTotal === 1" class="changeable-dashboard one-day-data">
-        <CircularProgress :used="dataUsage" :total="dataTotal"  />
+      <div v-if="loading">
+        <CircularProgress
+          :used="dataUsage"
+          :total="dataTotal"
+          :loading="loading"
+        />
         <div class="capsule card-content">
           <div class="left">
             <h2>
@@ -76,7 +31,128 @@
           </div>
         </div>
       </div>
-      <div v-else-if="esimData.dateTotal === 4" class="changeable-dashboard four-day-data">
+      <div
+        v-if="esimData.dataTotal === null"
+        class="changeable-dashboard empty-data"
+      >
+        <img :src="EmptyImg" alt="empty" />
+        <h1>{{ $t("dashboard.emptyData") }}</h1>
+        <p>{{ $t("dashboard.startPlan") }}</p>
+        <button class="start-plan-button" @click="router.push('/tutorial')">
+          <div>
+            {{ $t("dashboard.startPlanButton") }}
+          </div>
+          <Arrow />
+        </button>
+      </div>
+      <div
+        v-else-if="esimData.dataTotal === 'Unlimited data'"
+        class="changeable-dashboard infinite-data"
+      >
+        <div class="capsule infinite-capsule">
+          <div>
+            <div class="content">
+              {{ esimData.dateUsage }}/{{ esimData.dateTotal }}
+            </div>
+            <div class="unit">Days</div>
+          </div>
+          <div>
+            <div class="content">{{ esimData.dataUsage }}</div>
+            <div class="unit">used</div>
+          </div>
+        </div>
+        <Infinite @click="toPage('/usagedetail')" />
+        <div class="capsule card-content">
+          <div class="left">
+            <h2>
+              {{
+                $t("dashboard.countryDays", {
+                  count: esimData.dateTotal,
+                  country: esimData.country,
+                })
+              }}
+            </h2>
+            <p>
+              {{
+                $t("dashboard.dataDay", {
+                  count: esimData.dateTotal,
+                  data: esimData.dataTotal,
+                })
+              }}
+            </p>
+          </div>
+          <div class="right">
+            <button class="start-btn" @click="showDetail">Plan started</button>
+          </div>
+        </div>
+      </div>
+      <div
+        v-else-if="esimData.dateTotal === 1"
+        class="changeable-dashboard one-day-data"
+      >
+        <CircularProgress :used="dataUsage" :total="dataTotal" />
+        <div class="capsule card-content">
+          <div class="left">
+            <h2>
+              {{
+                $t("dashboard.countryDays", {
+                  count: esimData.dateTotal,
+                  country: esimData.country,
+                })
+              }}
+            </h2>
+            <p>
+              {{
+                $t("dashboard.dataDays", {
+                  count: esimData.dateTotal,
+                  data: esimData.dataTotal,
+                })
+              }}
+            </p>
+          </div>
+          <div class="right">
+            <button class="start-btn" @click="showDetail">Plan started</button>
+          </div>
+        </div>
+      </div>
+      <div
+        v-else-if="esimData.dataTotal === 'error'"
+        class="changeable-dashboard error-data"
+      >
+        <CircularProgress
+          :used="dataUsage"
+          :total="dataTotal"
+          :loading="loading"
+          isError
+        />
+        <div class="capsule card-content">
+          <div class="left">
+            <h2>
+              {{
+                $t("dashboard.countryDays", {
+                  count: esimData.dateTotal,
+                  country: esimData.country,
+                })
+              }}
+            </h2>
+            <p>
+              {{
+                $t("dashboard.dataDays", {
+                  count: esimData.dateTotal,
+                  data: esimData.dataTotal,
+                })
+              }}
+            </p>
+          </div>
+          <div class="right">
+            <button class="start-btn" @click="showDetail">Plan started</button>
+          </div>
+        </div>
+      </div>
+      <div
+        v-else-if="esimData.dateTotal > 1"
+        class="changeable-dashboard four-day-data"
+      >
         <barChar />
         <div class="capsule card-content">
           <div class="left">
@@ -106,7 +182,11 @@
     <div class="about-sim">
       <h2>{{ $t("dashboard.aboutESIM") }}</h2>
       <div class="about-list">
-        <div class="capsule about-content" v-for="item in aboutList" :key="item.title">
+        <div
+          class="capsule about-content"
+          v-for="item in aboutList"
+          :key="item.title"
+        >
           <component :is="item.icon" size="21" />
           <div class="about-content-title">{{ item.title }}</div>
         </div>
@@ -165,37 +245,24 @@ import { useI18n } from "vue-i18n";
 import { useRouter, useRoute } from "vue-router";
 import { Swipe as VanSwipe, SwipeItem as VanSwipeItem } from "vant";
 import { onMounted, ref } from "vue";
-import { getESIMDataById } from "@/mock/mockDashboard";
 import Infinite from "@/components/icons/Infinite.vue";
 import DetailCard from "./DetailCard.vue";
 import swiper from "@/assets/swiper.png";
 import CircularProgress from "./CircularProgress.vue";
 import barChar from "./barChar.vue";
 import { computed } from "vue";
+import { asyncGet, mockESIMData, detailData } from "@/mock";
+import { useToast } from '@/utils/utils'
 
-const router = useRouter()
+const router = useRouter();
 const toPage = (path) => {
-  router.push(path)
-}
+  router.push(path);
+};
 
-const arrowClicked = (key) => {
-  toPage(`/dashboard/${key}`)
-}
-
-const detailData = {
-  coverage: 'USA eSIM',
-  data: '1 day / Total 3.00 GB',
-  validity: '2025-02-25',
-  esimNumber: '77564567892491',
-  smdp: 'sim.express',
-  activationCode: '01238D204C8366F946E62',
-  apn: 'AAAplus + BBB',
-  operator: 'AT& T + Verizon + ??'
-}
-const show = ref(false)
+const show = ref(false);
 const showDetail = () => {
-  show.value = true
-}
+  show.value = true;
+};
 const { t } = useI18n();
 const route = useRoute();
 const esimData = ref({
@@ -208,18 +275,35 @@ const esimData = ref({
 });
 
 const dataTotal = computed(() => {
-  return esimData.value.dataTotal.split('GB')[0]
-})
+  return esimData.value.dataTotal.split("GB")[0];
+});
 
 const dataUsage = computed(() => {
-  return esimData.value.dataUsage.split('GB')[0]
-})
+  return esimData.value.dataUsage.split("GB")[0];
+});
 
+const loading = ref(false);
+
+const showToast = () => {
+  useToast({
+    message: 'Please enable eSIM in Celluar',
+    type: 'warning',
+    duration: 3000,
+    onClick: () => {
+      console.log(123);
+    }
+  })
+}
 onMounted(() => {
+  loading.value = true;
   const id = route.params.id;
-  esimData.value = getESIMDataById(id);
-  console.log(esimData.value);
-  
+  asyncGet(mockESIMData[id]).then((res) => {
+    esimData.value = res;
+    loading.value = false;
+    if (res.dataTotal === 'error') {
+      showToast()
+    }
+  });
 });
 const aboutList = [
   {
@@ -311,7 +395,7 @@ const aboutList = [
         align-items: center;
         justify-content: center;
 
-        &>div {
+        & > div {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -368,7 +452,7 @@ const aboutList = [
         .start-btn {
           padding: 4px 12px;
           border-radius: 100px;
-          border: 1px solid #E0E6E9;
+          border: 1px solid #e0e6e9;
           font-weight: 600;
           font-size: 14px;
           line-height: 19px;
@@ -453,7 +537,7 @@ const aboutList = [
         }
 
         &::after {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           left: 0;
