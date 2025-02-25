@@ -65,7 +65,7 @@
     <!-- user-group -->
     <PopupBottom v-model="show" :title="t('layout.groupTitle')">
       <div class="group-member">
-        <div v-for="(user, index) in groupList" :key="index" class="group-item">
+        <div v-for="(user, index) in realGroupList" :key="index" class="group-item">
           <div class="user-info">
             <img :src="user.avatar" alt="avatar" class="user-avatar" />
             <div class="user-name">{{ user.name }}</div>
@@ -106,6 +106,7 @@ import User2 from "@/assets/user2.png";
 import User3 from "@/assets/user3.png";
 import { useStore } from '@/store'
 import { changeLanguage } from '@/locales/i18n'
+import { asyncGet } from '@/mock'
 
 const store = useStore()
 
@@ -145,17 +146,7 @@ const groupList = [
     number: 77564567892491,
   },
 ];
-
-const actions = [
-  { name: "English", value: "en" },
-  { name: "日本語", value: "jp" },
-];
-const onSelect = (item) => {
-  changeLanguage(item.value);
-  showAction.value = false;
-};
 const realGroupList = ref([]);
-
 const headerTemplate = computed(() => route.meta.headerTemplate || "default");
 
 const title = computed(() =>
@@ -167,12 +158,12 @@ const onBack = () => {
 };
 
 const onClose = () => {
-  const prevRoute = store.closeRoutes.getCloseRoutes;
-  if (prevRoute === "") {
-    router.back();
+  const prevRoute = store.closeRoutes.getCloseRoutes
+  if (prevRoute === '') {
+    router.back()
   } else {
-    router.push(prevRoute);
-    store.closeRoutes.setCloseRoutes("");
+    router.push(prevRoute)
+    store.closeRoutes.setCloseRoutes('')
   }
 };
 
@@ -192,7 +183,7 @@ const onContactService = () => {
 
 // 用户中心按钮
 const onUserCenter = () => {
-  asyncGet(groupList).then((res) => {
+  asyncGet(groupList, 500).then((res) => {
     realGroupList.value = res;
     show.value = true;
   });
@@ -311,11 +302,11 @@ const onUserCenter = () => {
     }
 
     .user-status span {
-      color: #ffb61d;
+      color: #FFB61D;
     }
 
     .user-number span {
-      color: #6c7278;
+      color: #6C7278;
     }
   }
 }

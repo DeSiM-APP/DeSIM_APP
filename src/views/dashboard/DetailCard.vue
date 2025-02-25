@@ -96,7 +96,7 @@ const handleCopy = (value) => {
         .copy-btn {
           position: absolute;
           right: 0;
-          top: 0;
+          top: 20px;
         }
 
       }
