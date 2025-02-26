@@ -1,6 +1,7 @@
 name: Deploy Vite Vue 3 app to GitHub Pages
 
 on:
+  workflow_dispatch: 
   push:
     branches: 
       - main
