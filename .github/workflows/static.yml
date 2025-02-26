@@ -1,0 +1,51 @@
+name: Deploy Vite Vue 3 app to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code from GitHub repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Set up Node.js environment (ensure it matches the version you're using locally)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # 使用你项目所需的 Node 版本
+
+      # Install dependencies
+      - name: Install dependencies
+        run: |
+          npm install  # 或者 yarn install，如果你用的是 Yarn
+
+      # Build the app using Vite
+      - name: Build the app
+        run: |
+          npm run build  # Vite 默认会将构建输出放在 dist 目录下
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
+        with:
+          path: ./dist  # Vite 默认的构建目录
+
+      # (可选) 如果你有自定义域名，可以在这一步配置 CNAME 文件
+      - name: Set custom domain (optional)
+        run: |
+          echo "www.your-custom-domain.com" > ./dist/CNAME
