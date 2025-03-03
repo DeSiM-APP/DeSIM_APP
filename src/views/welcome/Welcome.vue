@@ -45,17 +45,17 @@ const welcomeBigSynopsis = t('welcome.bigSynopsis');
       height: 100%;
     }
     .mf {
-      width: 65%;
+      width: 275px;
       position: absolute;
-      top: 41%;
-      left: 34%;
+      top: 150px;
+      right: 8px;
       transform: rotate(360.88deg);
     }
     .hy {
       width: 149.25px;
       position: absolute;
-      top: 61%;
-      left: 19%;
+      top: 240px;
+      right: 180px;
     }
   }
   .welcome-big-synopsis {
