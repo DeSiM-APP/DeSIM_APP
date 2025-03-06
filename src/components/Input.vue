@@ -28,9 +28,10 @@ function onInput(event) {
 
 <style scoped lang="scss">
 .input-component {
-  width: 350px;
+  width: 100%;
   height: 46px;
-  padding: 5% 3%;
+  padding: 12.5px 14px;
+  font-size: 14px;
   border-radius: 10px;
   border: 1px solid var(--Stroke, #EDF1F3);
   box-shadow: 0px 1px 2px 0px #E4E5E73D;

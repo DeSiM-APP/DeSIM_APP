@@ -1,7 +1,7 @@
 <template>
   <div class="import">
     <img :src="Bee" alt="bee" class="bee">
-    <div>
+    <div style="width: 100%;">
       <label class="import-label">
         {{ $t('import.label') }}
       </label>
@@ -54,8 +54,7 @@ const toPage = (path) => {
     letter-spacing: -2%;
     height: 21px;
     line-height: 21px;
-    color: var(--Grey, #6C7278);
-
+    display: flex;
   }
 
   .import-button {

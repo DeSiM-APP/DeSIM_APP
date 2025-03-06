@@ -96,6 +96,7 @@ const toPage = (path) => {
     height: 21px;
     line-height: 21px;
     color: var(--Grey, #6C7278);
+    display: flex;
   }
   }
   .wjmm{
@@ -110,7 +111,7 @@ const toPage = (path) => {
   .or-line{
     width: 100%;
     text-align: center;
-    margin-top: 9%;
+    margin-top: 85px;
     margin-bottom: 24px;
     position: relative;
     color: #6C7278;
@@ -121,7 +122,7 @@ const toPage = (path) => {
       content: '';
       position: absolute;
       top: 50%;
-      width: 140px;
+      width: calc(50% - 24px);
       height: 1px;
       background-color: #E5E5E5;
     }

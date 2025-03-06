@@ -78,6 +78,11 @@ html, body, #app {
 	height: 100%;
 }
 
+#app {
+	margin: 0 auto;
+	max-width: 1000px;
+}
+
 :root {
 	--Stroke: #EDF1F3;
 	--ThemeColor: #F4D42D;
