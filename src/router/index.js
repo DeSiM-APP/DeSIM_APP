@@ -23,16 +23,20 @@ const routes = [
     name: 'Login',
     component: Login
   },
-  {
-    path: '/register',
-    name: 'Register',
-    component: Register
-  },
   // 使用 Layout 包裹的页面
   {
     path: '/',
     component: Layout,
     children: [
+      {
+        path: '/register',
+        name: 'Register',
+        component: Register,
+        meta: {
+          headerTemplate: 'back',
+          title: ' '
+        }
+      },
       {
         path: 'home',
         name: 'Home',
